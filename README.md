@@ -77,7 +77,8 @@ ppw-2026-week2-12S24004/
 │   ├── dummymine.jpg
 │   ├── nextstep.png
 │   ├── sertifikat-himiverse.pdf
-│   └── sertifikat-del-english-club.pdf
+│   ├── sertifikat-algopython.pdf
+│   └── sertifikat-del-english-club.png
 └── screenshots/
     ├── desktop.png
     └── mobile.png
