@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio Silvia Eklesiana Sitorus, mahasiswa S1 Sistem Informasi Institut Teknologi Del, UI/UX Designer dan Software Developer. Juara 2 Kompetisi Nasional UI/UX HIMIVERSE 2.0.">
+  <title>Portofolio Silvia Eklesiana Sitorus | PPW Del</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23be185d'/><text x='50' y='66' font-size='46' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='white'>S</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Skip link: membantu pengguna keyboard & pembaca layar (WCAG 2.4.1) -->
+  <a class="skip-link" href="#konten-utama">Lewati ke konten utama</a>
+
+  <!-- ===================== HEADER: logo + navigasi ===================== -->
+  <header class="site-header">
+    <a class="logo" href="#beranda" aria-label="Silvia Eklesiana Sitorus, kembali ke beranda">SES<span aria-hidden="true">.</span></a>
+    <nav aria-label="Navigasi utama">
+      <ul class="nav-list" role="list">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#portofolio">Portofolio</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===================== MAIN: hanya satu per dokumen ===================== -->
+  <main id="konten-utama">
+
+    <!-- Beranda / hero -->
+    <section id="beranda" class="hero" aria-labelledby="judul-hero">
+      <div class="hero-text">
+        <h1 id="judul-hero">Halo, saya <span class="hero-name">Silvia Eklesiana Sitorus.</span></h1>
+        <p class="hero-lead">
+          Mahasiswa S1 Sistem Informasi di Institut Teknologi Del. Saya merancang
+          pengalaman digital lewat UI/UX dan pengembangan perangkat lunak.
+        </p>
+        <ul class="hero-roles" role="list">
+          <li>UI/UX Design</li>
+          <li>Front-end</li>
+          <li>Analisis sistem</li>
+        </ul>
+        <p class="hero-actions">
+          <a class="btn btn-primary" href="#portofolio">Lihat portofolio</a>
+          <a class="btn btn-outline" href="#layanan">Pesan konsultasi</a>
+        </p>
+      </div>
+
+      <figure class="hero-figure">
+        <!-- FOTO: ganti file assets/profile.jpeg dengan fotomu (nama file tetap sama) -->
+        <div class="hero-photo">
+          <img src="assets/profile.jpeg" width="800" height="1000" alt="Foto profil Silvia Eklesiana Sitorus">
+        </div>
+      </figure>
+
+      <a class="scroll-hint" href="#tentang" aria-label="Gulir ke bagian Tentang saya">
+        <span>Gulir</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- SECTION 1: Tentang Saya (+ aside) -->
+    <section id="tentang" class="about" aria-labelledby="judul-tentang">
+      <h2 id="judul-tentang">Tentang saya</h2>
+
+      <div class="about-top">
+        <article class="about-main">
+          <p>
+            Saya mahasiswa semester 5 Program Studi S1 Sistem Informasi di Institut Teknologi Del.
+            Minat saya ada di desain UI/UX, pengembangan perangkat lunak, dan aplikasi mobile.
+            Saya senang menyederhanakan masalah yang rumit menjadi pengalaman digital yang jelas,
+            indah, dan mudah dipakai.
+          </p>
+          <p>
+            Di kampus, saya aktif di BEM dan HIMSI, serta terus mengasah kemampuan lewat proyek
+            desain, pemrograman, dan analisis sistem. Beberapa karya dan capaian saya bisa dilihat
+            di bagian Portofolio.
+          </p>
+
+          <h3>Perjalanan akademik</h3>
+          <!-- Ordered list: urutan tahun memang berurutan -->
+          <ol class="timeline" role="list">
+            <li><strong>2024</strong> Memulai studi S1 Sistem Informasi di Institut Teknologi Del.</li>
+            <li><strong>2025</strong> Mengikuti bootcamp Python Pro Student di Algonova, menjadi Brand Ambassador PopSurvey, dan menerbitkan tinjauan pustaka di Jurnal SIMASI (SINTA 5).</li>
+            <li><strong>2026</strong> Bergabung di BEM dan menjadi Panitia Kaderisasi HIMSI, serta meraih juara 2 Kompetisi Nasional UI/UX HIMIVERSE 2.0 yang diselenggarakan Universitas Dirgantara Marsekal Suryadarma.</li>
+          </ol>
+        </article>
+
+        <!-- ASIDE: informasi pelengkap -->
+        <aside class="about-aside" aria-labelledby="judul-info">
+          <h3 id="judul-info">Info singkat</h3>
+          <!-- Description list: pasangan istilah dan keterangan -->
+          <dl>
+            <dt>Program studi</dt>
+            <dd>S1 Sistem Informasi</dd>
+            <dt>Kampus</dt>
+            <dd>Institut Teknologi Del</dd>
+            <dt>Semester</dt>
+            <dd>5</dd>
+            <dt>Email</dt>
+            <dd><a href="mailto:silviaeklesiana12@gmail.com">silviaeklesiana12<wbr>@gmail.com</a></dd>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/SilviaSitorus12" rel="noopener">SilviaSitorus12</a></dd>
+            <dt>LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/silvia-sitorus" rel="noopener">silvia-sitorus</a></dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="about-block" aria-labelledby="judul-organisasi">
+        <h3 id="judul-organisasi">Organisasi dan kegiatan</h3>
+        <!-- Unordered list: daftar tanpa urutan -->
+        <ul class="org-list" role="list">
+          <li>
+            <strong>Departemen Dalam Negeri, BEM Institut Teknologi Del</strong>
+            <span>2026 sampai sekarang</span>
+          </li>
+          <li>
+            <strong>Anggota Panitia Kaderisasi, HIMSI Institut Teknologi Del</strong>
+            <span>2026</span>
+          </li>
+          <li>
+            <strong>Brand Ambassador, PopSurvey</strong>
+            <span>2025</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about-block" aria-labelledby="judul-keahlian">
+        <h3 id="judul-keahlian">Keahlian</h3>
+        <dl class="skill-groups">
+          <div>
+            <dt>Desain</dt>
+            <dd>
+              <ul class="chips" role="list">
+                <li>Figma</li>
+                <li>Wireframing &amp; prototyping</li>
+                <li>Heuristic evaluation</li>
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt>Pemrograman</dt>
+            <dd>
+              <ul class="chips" role="list">
+                <li>Python</li>
+                <li>Java</li>
+                <li>HTML &amp; CSS</li>
+                <li>JavaScript</li>
+                <li>SQL</li>
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt>Analisis sistem</dt>
+            <dd>
+              <ul class="chips" role="list">
+                <li>BPMN</li>
+                <li>ERD</li>
+                <li>SRS</li>
+                <li>DFD</li>
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt>Alat kerja</dt>
+            <dd>
+              <ul class="chips" role="list">
+                <li>Git &amp; GitHub</li>
+                <li>Canva</li>
+                <li>Maze</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </section>
+
+    <!-- SECTION 2: Portofolio Karya -->
+    <section id="portofolio" class="portfolio" aria-labelledby="judul-portofolio">
+      <h2 id="judul-portofolio">Portofolio karya</h2>
+      <p class="section-lead">
+        Lima proyek desain dan pengembangan, disusul rekap capaian, sertifikasi, dan publikasi.
+      </p>
+
+      <h3>Proyek pilihan</h3>
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-cover">
+            <img src="assets/globora.png" alt="Tangkapan layar rancangan antarmuka GLOBORA: deretan halaman detail pemesanan dan pelanggan" loading="lazy" decoding="async">
+            <span class="card-kind">Platform pariwisata</span>
+          </div>
+          <div class="card-body">
+          <h4>GLOBORA</h4>
+          <p class="card-role">UI/UX Designer &amp; Business Analyst</p>
+          <p>Platform pariwisata terpadu yang mempromosikan wisata lokal dan memperkaya pengalaman perjalanan wisatawan.</p>
+          <ul class="chips chips-small" role="list">
+            <li>Figma</li>
+            <li>Canva</li>
+          </ul>
+          <a class="card-link" href="https://www.figma.com/design/WTyEKYrKFgQfdNl4Haerdf/dianita-ginting21-s-team-library?node-id=3411-2&amp;p=f&amp;t=C6G5DQAMqYVvmf02-0" rel="noopener">Lihat desain GLOBORA</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-cover">
+            <img src="assets/imuniku.png" alt="Tangkapan layar rancangan aplikasi Imuniku: beberapa layar ponsel untuk memantau imunisasi anak" loading="lazy" decoding="async">
+            <span class="card-kind">Aplikasi</span>
+          </div>
+          <div class="card-body">
+          <h4>Imuniku</h4>
+          <p class="card-role">UI/UX Designer</p>
+          <p>Aplikasi pemantauan imunisasi anak yang membantu orang tua menjaga kesehatan anaknya.</p>
+          <ul class="chips chips-small" role="list">
+            <li>Figma</li>
+            <li>Maze</li>
+          </ul>
+          <a class="card-link" href="https://www.figma.com/design/1krxirOo93xABqEIKacb66/ImuniKu_-UI-UX?node-id=0-1&amp;p=f&amp;t=yq5IcSOjEnu1BHwu-0" rel="noopener">Lihat desain Imuniku</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-cover">
+            <img src="assets/labersa.png" alt="Tangkapan layar rancangan Labersa Sport Center: halaman login, jadwal, dan formulir pemesanan" loading="lazy" decoding="async">
+            <span class="card-kind">Sistem informasi</span>
+          </div>
+          <div class="card-body">
+          <h4>Labersa Sport Center IS</h4>
+          <p class="card-role">System Analyst &amp; UI/UX Designer</p>
+          <p>Sistem informasi reservasi dan pengelolaan berbasis web untuk Labersa Sport Center.</p>
+          <ul class="chips chips-small" role="list">
+            <li>Figma</li>
+            <li>Analisis sistem</li>
+          </ul>
+          <a class="card-link" href="https://www.figma.com/design/mq0gXGzPreqN0ibt8bnhre/Untitled?node-id=0-1&amp;p=f&amp;t=Gxw0An0DqrTNE286-0" rel="noopener">Lihat desain Labersa</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-cover">
+            <img src="assets/dummymine.jpg" alt="Tangkapan layar game DummyMine: dunia blok 3D dengan karakter di atasnya" loading="lazy" decoding="async">
+            <span class="card-kind">Game</span>
+          </div>
+          <div class="card-body">
+          <h4>DummyMine</h4>
+          <p class="card-role">Python Game Developer</p>
+          <p>Game sandbox bergaya Minecraft yang dibangun dengan Python dan prinsip pemrograman berorientasi objek (OOP).</p>
+          <ul class="chips chips-small" role="list">
+            <li>Python</li>
+            <li>OOP</li>
+          </ul>
+          <a class="card-link" href="https://github.com/SilviaSitorus12/dummymine" rel="noopener">Lihat kode DummyMine</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-cover">
+            <img src="assets/nextstep.png" alt="Tangkapan layar NextStep AI: dasbor rencana pengembangan mahasiswa" loading="lazy" decoding="async">
+            <span class="card-kind">Platform AI</span>
+          </div>
+          <div class="card-body">
+          <h4>NextStep AI</h4>
+          <p class="card-role">Front-End Developer</p>
+          <p>Platform panduan karier berbasis AI yang membantu mahasiswa menjelajahi pilihan karier dan meningkatkan kesiapan kerja.</p>
+          <ul class="chips chips-small" role="list">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+          </ul>
+          <a class="card-link" href="https://github.com/SilviaSitorus12/nextstep" rel="noopener">Lihat kode NextStep AI</a>
+          </div>
+        </article>
+      </div>
+
+      <h3>Rekap capaian</h3>
+      <!-- Wrapper scroll agar tabel tetap terbaca di layar kecil; tabindex agar bisa di-scroll dengan keyboard -->
+      <div class="table-wrap" role="region" aria-labelledby="caption-tabel" tabindex="0">
+        <table>
+          <caption id="caption-tabel">Prestasi, sertifikasi, dan publikasi</caption>
+          <thead>
+            <tr>
+              <th scope="col">Capaian</th>
+              <th scope="col">Jenis</th>
+              <th scope="col">Penyelenggara</th>
+              <th scope="col">Tahun</th>
+              <th scope="col">Bukti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Urutan dari yang terbaru -->
+            <tr>
+              <th scope="row">Juara 2 Kompetisi Nasional UI/UX HIMIVERSE 2.0</th>
+              <td><span class="tag tag-highlight">Prestasi</span></td>
+              <td>Himpunan Mahasiswa Informatika, Universitas Dirgantara Marsekal Suryadarma</td>
+              <td>2026</td>
+              <td><a class="table-link" href="assets/sertifikat-himiverse.pdf" aria-label="Sertifikat juara 2 HIMIVERSE 2.0 (PDF)">Sertifikat</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Sertifikasi AlgoPython</th>
+              <td><span class="tag">Sertifikasi</span></td>
+              <td>Algonova</td>
+              <td>2025</td>
+              <td><a class="table-link" href="https://portfolio-sand-xi-55.vercel.app/assets/certificates/sertif-algo.pdf" rel="noopener" aria-label="Sertifikat AlgoPython (PDF)">Sertifikat</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Laporan Python Pro Student</th>
+              <td><span class="tag">Akademik</span></td>
+              <td>Algonova Bootcamp</td>
+              <td>2025</td>
+              <td><a class="table-link" href="https://portfolio-sand-xi-55.vercel.app/assets/certificates/raport-python.pdf" rel="noopener" aria-label="Laporan Python Pro Student (PDF)">Laporan</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Literature Review: Research Trends in Information Systems</th>
+              <td><span class="tag">Publikasi (SINTA 5)</span></td>
+              <td>Jurnal SIMASI</td>
+              <td>2025</td>
+              <td><a class="table-link" href="https://simasi.lppmbinabangsa.id/index.php/home/article/view/220" rel="noopener" aria-label="Artikel Literature Review di situs jurnal SIMASI">Jurnal</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Anggota Del English Club</th>
+              <td><span class="tag">Organisasi</span></td>
+              <td>Institut Teknologi Del</td>
+              <td>2024/2025</td>
+              <td><a class="table-link" href="assets/sertifikat-del-english-club.pdf" aria-label="Sertifikat Del English Club (PDF)">Sertifikat</a></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="3">Total capaian</th>
+              <td colspan="2">5</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Formulir Layanan -->
+    <section id="layanan" class="service" aria-labelledby="judul-layanan">
+      <h2 id="judul-layanan">Formulir layanan konsultasi</h2>
+      <p class="section-lead">
+        Ceritakan kebutuhan desain atau website Anda. Kolom bertanda <span class="req" aria-hidden="true">*</span>
+        wajib diisi.
+      </p>
+
+      <div class="service-layout">
+        <form id="form-konsultasi" class="service-form" action="#" method="post">
+
+          <!-- Blok 1 -->
+          <fieldset class="form-fieldset">
+            <legend>Data identitas</legend>
+
+            <div class="form-group full">
+              <label for="nama" class="form-label">Nama lengkap <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="nama" name="nama" class="form-control"
+                     required minlength="3" autocomplete="name"
+                     placeholder="Contoh: Budi Santoso">
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" class="form-control"
+                     required autocomplete="email" aria-describedby="email-help"
+                     placeholder="nama@email.com">
+              <small id="email-help" class="form-help">Gunakan email aktif agar balasan sampai.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="telepon" class="form-label">Nomor telepon <span class="req" aria-hidden="true">*</span></label>
+              <input type="tel" id="telepon" name="telepon" class="form-control"
+                     required pattern="0[0-9]{9,12}" inputmode="tel" autocomplete="tel"
+                     aria-describedby="telepon-help" title="Awali dengan 0, total 10 sampai 13 digit angka"
+                     placeholder="081234567890">
+              <small id="telepon-help" class="form-help">Tulis angka saja, tanpa spasi atau tanda hubung.</small>
+            </div>
+          </fieldset>
+
+          <!-- Blok 2 -->
+          <fieldset class="form-fieldset">
+            <legend>Detail layanan</legend>
+
+            <div class="form-group full">
+              <label for="layanan-jenis" class="form-label">Jenis layanan <span class="req" aria-hidden="true">*</span></label>
+              <select id="layanan-jenis" name="layanan" class="form-control" required>
+                <option value="">Pilih jenis layanan</option>
+                <option value="uiux">Desain UI/UX (Figma)</option>
+                <option value="web">Website atau landing page</option>
+                <option value="sistem">Analisis dan perancangan sistem</option>
+                <option value="review">Review usability dan aksesibilitas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="halaman" class="form-label">Jumlah halaman atau layar <span class="req" aria-hidden="true">*</span></label>
+              <input type="number" id="halaman" name="halaman" class="form-control"
+                     required min="1" max="20" step="1" aria-describedby="halaman-help"
+                     placeholder="1">
+              <small id="halaman-help" class="form-help">Antara 1 sampai 20.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="target" class="form-label">Target selesai <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="target" name="target" class="form-control" required>
+            </div>
+
+            <!-- Radio button: satu pilihan -->
+            <fieldset class="choice-group full">
+              <legend>Prioritas pengerjaan <span class="req" aria-hidden="true">*</span></legend>
+              <div class="choice-list">
+                <div class="choice">
+                  <input type="radio" id="prioritas-reguler" name="prioritas" value="reguler" required>
+                  <label for="prioritas-reguler">Reguler</label>
+                </div>
+                <div class="choice">
+                  <input type="radio" id="prioritas-cepat" name="prioritas" value="cepat" required>
+                  <label for="prioritas-cepat">Cepat</label>
+                </div>
+                <div class="choice">
+                  <input type="radio" id="prioritas-mendesak" name="prioritas" value="mendesak" required>
+                  <label for="prioritas-mendesak">Mendesak</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Checkbox: boleh pilih lebih dari satu -->
+            <fieldset class="choice-group full">
+              <legend>Fitur tambahan (opsional)</legend>
+              <div class="choice-list">
+                <div class="choice">
+                  <input type="checkbox" id="fitur-responsif" name="fitur" value="responsif">
+                  <label for="fitur-responsif">Tampilan responsif</label>
+                </div>
+                <div class="choice">
+                  <input type="checkbox" id="fitur-prototipe" name="fitur" value="prototipe">
+                  <label for="fitur-prototipe">Prototipe interaktif</label>
+                </div>
+                <div class="choice">
+                  <input type="checkbox" id="fitur-uji" name="fitur" value="uji-pengguna">
+                  <label for="fitur-uji">Uji pengguna</label>
+                </div>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <!-- Blok 3 -->
+          <fieldset class="form-fieldset">
+            <legend>Pesan dan persetujuan</legend>
+
+            <div class="form-group full">
+              <label for="pesan" class="form-label">Deskripsi kebutuhan <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="pesan" name="pesan" class="form-control" rows="5"
+                        required minlength="20" maxlength="500" aria-describedby="pesan-help"
+                        placeholder="Tuliskan tujuan proyek, target pengguna, dan referensi yang Anda suka."></textarea>
+              <small id="pesan-help" class="form-help">Minimal 20 dan maksimal 500 karakter.</small>
+            </div>
+
+            <div class="choice full">
+              <input type="checkbox" id="setuju" name="setuju" required>
+              <label for="setuju">Saya setuju data ini dipakai untuk keperluan konsultasi. <span class="req" aria-hidden="true">*</span></label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary btn-submit">Kirim permintaan konsultasi</button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="service-aside" aria-labelledby="judul-layanan-tersedia">
+          <h3 id="judul-layanan-tersedia">Layanan yang tersedia</h3>
+          <ul class="service-list" role="list">
+            <li>Desain UI/UX (Figma)</li>
+            <li>Website atau landing page</li>
+            <li>Analisis dan perancangan sistem</li>
+            <li>Review usability dan aksesibilitas</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Silvia Eklesiana Sitorus. Tugas Minggu 02 PPW, Institut Teknologi Del.</p>
+    <nav aria-label="Navigasi footer">
+      <ul class="footer-links" role="list">
+        <li><a href="https://github.com/SilviaSitorus12" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/silvia-sitorus" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://instagram.com/silvia_ekle12" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:silviaeklesiana12@gmail.com">Email</a></li>
+        <li><a href="#beranda">Kembali ke atas</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
