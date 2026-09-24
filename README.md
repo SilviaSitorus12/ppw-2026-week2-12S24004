@@ -1,126 +1,118 @@
-# Portofolio Silvia Eklesiana Sitorus
+# Portofolio Silvia Eklesiana Sitorus — Minggu 3 (Bootstrap 5)
 
-Halaman web portofolio profesional (single page) untuk **Tugas Mandiri Minggu 02** mata kuliah
-**Pemrograman dan Pengujian Aplikasi Web (12S3101)**, Program Studi S1 Sistem Informasi,
-Institut Teknologi Del.
+Modernisasi dan refactoring **Personal Portfolio & Service Portal** dari Minggu 2, kini
+dibangun di atas **Bootstrap 5.3** dan **Custom CSS Overrides**, untuk mata kuliah
+**Pemrograman dan Pengujian Aplikasi Web (12S3101)**, Institut Teknologi Del.
+
+Proyek ini adalah **refactoring**, bukan proyek baru: dikembangkan di branch `week3-bootstrap`
+pada repositori Minggu 2 yang sama, sesuai ketentuan tugas.
 
 | | |
 |---|---|
-| **Live demo** | https://silviasitorus12.github.io/ppw-2026-week2-12S24004/ |
-| **Repositori** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004 |
-| **Dosen pengampu** | Chandro Pardede, S.Kom., M.Sc. |
+| **Nama** | Silvia Eklesiana Sitorus |
+| **NIM** | 12S24004 |
+| **Kelas** | S1 Sistem Informasi |
+| **Live demo** | https://silviasitorus12.github.io/ppw-2026-week2-12S24004/ *(tampil setelah GitHub Pages diarahkan ke branch `week3-bootstrap`, lihat bagian Deployment)* |
+| **Repositori — branch Minggu 3** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004/tree/week3-bootstrap |
+| **Repositori — branch Minggu 2 (`main`, tidak diubah)** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004 |
 
 ## Tampilan
 
-| Desktop | Mobile |
-|---------|--------|
-| <img src="screenshots/desktop.png" alt="Tampilan desktop halaman portofolio" width="560"> | <img src="screenshots/mobile.png" alt="Tampilan mobile halaman portofolio" width="240"> |
-
-## Deskripsi
-
-Halaman ini memperkenalkan profil akademik dan karya saya sebagai mahasiswa Sistem Informasi
-yang berfokus pada UI/UX Design, pengembangan perangkat lunak, dan analisis sistem.
-Isinya terbagi dalam beberapa bagian:
-
-- **Beranda:** perkenalan singkat, peran, dan foto profil.
-- **Tentang saya:** bio, perjalanan akademik, info singkat, organisasi, dan keahlian.
-- **Portofolio karya:** lima proyek pilihan (GLOBORA, Imuniku, Labersa Sport Center IS,
-  DummyMine, NextStep AI) beserta tabel rekap capaian, sertifikasi, dan publikasi.
-- **Layanan:** formulir konsultasi layanan desain dan pengembangan.
-
-## Pemenuhan Spesifikasi Tugas
-
-| Komponen (bobot) | Implementasi |
+| Sebelum (Minggu 2) | Sesudah (Minggu 3) |
 |---|---|
-| **Struktur semantik HTML5 (20%)** | `header`, 2 `nav`, 1 `main`, 6 `section`, `article`, 2 `aside`, `figure`, dan `footer`. Wadah `div` hanya dipakai untuk pengaturan tata letak. |
-| **Data tabular dan list (15%)** | Satu tabel semantik lengkap dengan `caption`, `thead`, `tbody`, `tfoot`, dan atribut `scope="col"` / `scope="row"`. Menggunakan tiga jenis list: `ul`, `ol` (perjalanan akademik), dan `dl` (info singkat, keahlian). |
-| **Formulir interaktif dan accessible (20%)** | 3 blok `fieldset` dengan `legend`, ditambah 2 kelompok pilihan bersarang. Memuat 9 jenis kontrol: text, email, tel, number, date, radio, checkbox, select, dan textarea. Semua kontrol memiliki `label for`, dan validasi native lewat `required`, `minlength`, `maxlength`, `pattern`, `min`, dan `max`. Teks bantuan dihubungkan dengan `aria-describedby`. |
-| **Estetika dan tata letak CSS modern (25%)** | `style.css` eksternal dengan reset `box-sizing: border-box`, palet warna 60-30-10, tipografi modern, `border-radius`, `box-shadow`, tata letak **Flexbox** dan **Grid**, serta responsif melalui `@media (max-width: 768px)`. |
-| **Git dan GitHub Pages (20%)** | Repositori publik `ppw-2026-week2-12S24004`, riwayat commit terstruktur, README ini, dan situs live di GitHub Pages. |
+| <img src="screenshots/sebelum-desktop.png" alt="Tampilan desktop Minggu 2" width="360"> | <img src="screenshots/sesudah-desktop.png" alt="Tampilan desktop Minggu 3" width="360"> |
+| <img src="screenshots/sebelum-mobile.png" alt="Tampilan mobile Minggu 2" width="180"> | <img src="screenshots/sesudah-mobile.png" alt="Tampilan mobile Minggu 3" width="180"> |
 
-## Palet Warna (Aturan 60-30-10)
+## Ringkasan Pembaruan
 
-| Porsi | Peran | Warna |
-|-------|-------|-------|
-| **60%** | Latar halaman dan kartu | `#fff7fa`, `#ffffff`, `#fdeaf1` |
-| **30%** | Teks, header tabel, footer | `#3a1d33`, `#6b4a62` |
-| **10%** | Tombol, tautan, lencana | `#be185d`, `#fbd5e5` |
+Halaman ini tetap mempertahankan **identitas dan struktur semantik HTML5** dari Minggu 2
+(`header`, `nav`, `main`, `section`, `article`, `aside`, `footer`), lalu direfaktor untuk
+memakai sistem grid dan komponen Bootstrap 5, ditimpa tema warna personal lewat `style.css`.
 
-Tipografi memakai **Fraunces** untuk judul dan **Plus Jakarta Sans** untuk teks isi,
-keduanya dari Google Fonts.
+## Tabel Komparasi: Sebelum vs Sesudah Integrasi Framework
 
-## Aksesibilitas (WCAG 2.2 AA)
+| Aspek | Sebelum (Minggu 2 — CSS murni) | Sesudah (Minggu 3 — Bootstrap 5.3) |
+|---|---|---|
+| **Tata letak** | `display: grid` dan `display: flex` kustom di `style.css` | Sistem grid 12-kolom Bootstrap: `row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4` |
+| **Navigasi** | `<header>` statis dengan `<nav>` sederhana, tanpa menu mobile | `navbar navbar-expand-lg navbar-dark sticky-top` dengan tombol hamburger (`navbar-toggler` + `collapse`) yang berfungsi penuh di ponsel |
+| **Kartu proyek** | Kartu `<article class="card">` kustom, tautan langsung ke Figma/GitHub | Kartu Bootstrap (`.card`, `.ratio`, `.badge`) + **Bootstrap Modal** untuk 2 proyek (GLOBORA, Imuniku) yang menampilkan detail tanpa berpindah halaman |
+| **Formulir** | `<input class="form-control">` kustom dengan `<label>` di atas input | **Floating Labels** (`.form-floating`), **Input Group** berikon Bootstrap Icons, serta umpan balik validasi visual (`.is-valid` / `.is-invalid`, `.valid-feedback` / `.invalid-feedback`) |
+| **Menu aktif saat digulir** | Skrip `IntersectionObserver` buatan sendiri di `script.js` | Fitur bawaan **Bootstrap Scrollspy** (`data-bs-spy="scroll"` pada `<body>`), tanpa satu baris JavaScript kustom |
+| **Responsivitas** | Satu breakpoint kustom `@media (max-width: 768px)` | Breakpoint Bootstrap berjenjang: `sm` (≥576px), `md` (≥768px), `lg` (≥992px), `xl` (≥1200px) |
+| **Ikon** | SVG inline buatan sendiri | Paket **Bootstrap Icons** via CDN (`bi bi-envelope`, `bi bi-telephone`, dst.) |
+| **Tema warna** | Custom property di `:root`, dipakai langsung di selector kustom | Custom property yang sama, kini **dipetakan ke variabel Bootstrap** (`--bs-primary`, `--bs-link-color`, dst.) agar seluruh komponen Bootstrap otomatis mengikuti tema personal |
+| **Berkas kode** | `index.html`, `style.css`, `script.js` (tiga berkas) | `index.html` dan `style.css` saja. `style.css` dimuat **setelah** `bootstrap.min.css` (CDN) agar override berjalan tanpa `!important`. Tidak ada `script.js` lagi — validasi formulir memakai delapan baris skrip resmi dari dokumentasi Bootstrap, ditulis inline di `index.html` |
 
-- Tautan *skip link* ke konten utama untuk pengguna keyboard dan pembaca layar.
-- Indikator fokus yang jelas pada semua elemen interaktif.
-- Kontras teks minimal 4.5:1, dan kontras batas kontrol formulir minimal 3:1.
-- Target sentuh minimal 44 px pada tombol, tautan menu, dan pilihan formulir.
-- Semua gambar memiliki teks alternatif (`alt`) yang deskriptif.
-- Label eksplisit untuk semua kontrol formulir, dan pilihan radio/checkbox ditandai dengan
-  warna sekaligus ikon centang, tidak hanya warna.
-- Tabel dibungkus area yang bisa digulir dengan keyboard pada layar kecil.
-- Menghormati preferensi *reduced motion*: animasi otomatis dinonaktifkan.
+## Pemenuhan Spesifikasi Tugas Minggu 3
+
+| Area evaluasi (bobot) | Implementasi |
+|---|---|
+| **Fondasi framework & semantik (15%)** | Bootstrap 5.3.3 CSS + JS Bundle dan Bootstrap Icons via CDN; struktur semantik HTML5 tetap utuh; `meta viewport` valid; `style.css` dimuat setelah Bootstrap |
+| **Responsive navbar & hero (20%)** | Navbar `sticky-top` dengan brand identity; tombol hamburger berfungsi tanpa error console; Hero Section satu layar penuh dengan CTA ganda dan petunjuk gulir |
+| **Grid portofolio & modal (20%)** | 5 kartu proyek dalam grid `row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`; tiap kartu memuat banner, badge teknologi, deskripsi, dan tombol seragam; 2 modal dengan konten berbeda (GLOBORA, Imuniku) |
+| **Modernisasi formulir (15%)** | Floating Labels untuk nama, jenis layanan, target, dan pesan; Input Group berikon untuk email dan telepon; select kategori; checkbox syarat; validasi visual lewat pola resmi Bootstrap `needs-validation` |
+| **Custom overrides & theming (15%)** | 9 variabel CSS pada `:root`; palet warna personal (plum, rose, blush); mikro-interaksi hover pada kartu dan tombol; **nol** penggunaan `!important` |
+| **Git & deployment (15%)** | Branch `week3-bootstrap` dari repo Minggu 2 (branch `main` tidak diubah); README ini memuat tabel komparasi dan screenshot; terpublikasi di GitHub Pages |
 
 ## Struktur Folder
 
 ```
-ppw-2026-week2-12S24004/
+ppw-2026-week2-12S24004/            (repositori, branch week3-bootstrap)
 ├── index.html
 ├── style.css
-├── script.js
 ├── README.md
-├── assets/
+├── assets/                         (dipakai bersama dengan branch main)
 │   ├── profile.jpeg
-│   ├── globora.png
-│   ├── imuniku.png
-│   ├── labersa.png
-│   ├── dummymine.jpg
-│   ├── nextstep.png
-│   ├── sertifikat-himiverse.pdf
-│   ├── sertifikat-algopython.pdf
-│   └── sertifikat-del-english-club.png
+│   ├── globora.png / imuniku.png / labersa.png / dummymine.jpg / nextstep.png
+│   └── sertifikat-*.pdf / .png
 └── screenshots/
-    ├── desktop.png
-    └── mobile.png
+    ├── sebelum-desktop.png / sebelum-mobile.png
+    └── sesudah-desktop.png / sesudah-mobile.png
 ```
 
 ## Menjalankan di Komputer Lokal
 
-1. Clone atau unduh repositori ini.
+1. Clone repositori, lalu pindah ke branch ini: `git checkout week3-bootstrap`.
 2. Buka folder di Visual Studio Code.
-3. Klik kanan `index.html`, lalu pilih **Open with Live Server**.
+3. Klik kanan `index.html` → **Open with Live Server**.
 
-Font dimuat dari Google Fonts, jadi koneksi internet diperlukan agar tipografi tampil sesuai rancangan.
+Bootstrap, Bootstrap Icons, dan Google Fonts dimuat lewat CDN, sehingga koneksi internet
+diperlukan agar tampilan sesuai rancangan.
 
 ## Deployment
 
 ```bash
-git init
+cd ppw-2026-week2-12S24004
+git checkout -b week3-bootstrap
 git add .
-git commit -m "feat: complete week 2 html5 and modern css assignment"
-git remote add origin https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004.git
-git branch -M main
-git push -u origin main
+git commit -m "feat(week3): refactor portfolio to bootstrap 5 grid and modern components"
+git push -u origin week3-bootstrap
 ```
 
-Setelah itu aktifkan **Settings → Pages → Branch: `main` → Save**. Situs akan aktif di
-tautan *live demo* di atas dalam 1 sampai 2 menit.
+Lalu di GitHub: **Settings → Pages → Branch: `week3-bootstrap` → Save**. Alamat live demo-nya
+tetap sama seperti Minggu 2, isinya yang berganti mengikuti branch yang dipilih di sini.
 
 ## Catatan
 
-- Formulir konsultasi bersifat **simulasi**. GitHub Pages hanya menyajikan berkas statis,
-  jadi `script.js` menampilkan pesan konfirmasi setelah validasi lolos, dan data tidak
-  dikirim ke server.
-- `script.js` juga menandai menu yang aktif sesuai bagian yang sedang dibaca dan memberi
-  bayangan tipis pada header saat halaman digulir.
+- Halaman ini **tidak memiliki berkas `script.js`**. Satu-satunya JavaScript yang dipakai
+  adalah delapan baris skrip validasi resmi dari
+  [dokumentasi Bootstrap 5](https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles),
+  ditulis inline di `index.html`, fungsinya hanya menambahkan kelas `was-validated` agar
+  kotak umpan balik validasi Bootstrap tampil. Navbar, modal, dan menu aktif saat digulir
+  (Scrollspy) semuanya bawaan Bootstrap lewat atribut `data-bs-*`, tanpa JavaScript tambahan.
+- Formulir konsultasi bersifat **simulasi**; data tidak dikirim ke server.
+- Berkas ini tidak memakai `!important` sama sekali. Warna dasar navbar dan warna latar
+  kartu/modal ditimpa lewat selector langsung (`.navbar`, `.card`), bukan lewat utilitas
+  Bootstrap yang bertanda `!important` bawaan, dan aturan `prefers-reduced-motion` menimpa
+  `:hover` yang sama persis sehingga menang lewat urutan cascade, bukan `!important`.
+- Selama proses refactoring, ditemukan satu bug dari efek samping override tema: Bootstrap
+  menghitung warna latar `.card` dan `.modal-content` dari `--bs-body-bg` secara internal,
+  sehingga saat warna latar halaman diubah, warna kartu ikut berubah dan nyaris menyatu
+  dengan latar. Diperbaiki dengan menyasar `.card`, `.modal-content`, dan `.dropdown-menu`
+  secara langsung.
 
 ## Teknologi
 
-HTML5, CSS3 (Flexbox, Grid, custom properties, `clamp()`, `position: sticky`),
-JavaScript dasar, Git, dan GitHub Pages. Ikon berupa SVG inline.
-
-## Pembuat
-
-**Silvia Eklesiana Sitorus**, S1 Sistem Informasi, Institut Teknologi Del.
-[GitHub](https://github.com/SilviaSitorus12) ·
-[LinkedIn](https://www.linkedin.com/in/silvia-sitorus)
+HTML5, Bootstrap 5.3.3 (CDN), Bootstrap Icons 1.11.3 (CDN), CSS3 kustom (Custom Properties,
+Flexbox, Grid), JavaScript minimal (delapan baris, validasi formulir resmi Bootstrap), Git,
+GitHub Pages.
