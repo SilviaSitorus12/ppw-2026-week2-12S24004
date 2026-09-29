@@ -1,0 +1,348 @@
+/* =========================================================
+   CUSTOM STYLE OVERRIDES — dimuat SETELAH bootstrap.min.css
+   Tidak ada satu pun !important di berkas ini.
+   ========================================================= */
+
+/* ---------- 1. CSS Custom Properties: tema personal (>= 6 variabel) ---------- */
+:root {
+  --brand-ink: #3a1d33;        /* teks utama, plum tua */
+  --brand-ink-soft: #6b4a62;   /* teks sekunder */
+  --brand-accent: #be185d;     /* aksen rose: tombol, tautan */
+  --brand-accent-dark: #9d174d;
+  --brand-soft: #fbd5e5;       /* latar lencana dan chip */
+  --brand-tint: #fdeaf1;       /* latar pita section */
+  --brand-bg: #fff7fa;         /* latar halaman */
+  --brand-radius: 20px;
+  --brand-shadow: 0 10px 24px -10px rgba(58, 29, 51, 0.28);
+}
+
+/* ---------- 2. Menimpa palet Bootstrap dengan tema personal ---------- */
+/* Bootstrap 5.3 membaca variabel --bs-* ini di seluruh komponennya (tombol,
+   link, focus ring, dsb.), jadi cukup didefinisikan ulang di sini, tanpa
+   !important dan tanpa menulis ulang tiap komponen satu per satu. */
+:root, [data-bs-theme="light"] {
+  --bs-primary: var(--brand-accent);
+  --bs-primary-rgb: 190, 24, 93;
+  --bs-link-color: var(--brand-accent-dark);
+  --bs-link-hover-color: var(--brand-accent);
+  --bs-body-color: var(--brand-ink);
+  --bs-body-bg: var(--brand-bg);
+  --bs-border-color: #f3d3e1;
+  --bs-focus-ring-color: rgba(190, 24, 93, 0.35);
+}
+
+/* Bootstrap menghitung ulang --bs-card-bg (dan sejenisnya) DARI --bs-body-bg
+   di dalam definisi komponennya sendiri (mis. .card { --bs-card-bg:
+   var(--bs-body-bg); }), sehingga override di :root saja tidak cukup.
+   Disasar langsung di sini, dengan spesifisitas yang sama seperti aturan
+   Bootstrap-nya, dan menang karena dimuat belakangan (tanpa !important). */
+.card, .modal-content, .dropdown-menu {
+  background-color: #ffffff;
+}
+
+/* ---------- 2b. Minggu 4: skeleton loading, toast, filter kategori ---------- */
+/* Skeleton (status Loading) meniru bentuk kartu asli, dibuat dari .placeholder Bootstrap */
+.skeleton-card { pointer-events: none; }
+.skeleton-banner {
+  aspect-ratio: 4 / 3;
+  background-color: var(--brand-tint);
+  overflow: hidden;
+}
+.skeleton-banner .placeholder { border-radius: 0; opacity: 0.5; }
+
+/* Tombol filter kategori: aktif memakai gaya solid, tidak aktif memakai outline */
+.filter-btn { font-size: 0.85rem; }
+
+/* Toast: disasar langsung (sama seperti .card) supaya warnanya tidak ikut
+   berubah mengikuti --bs-body-bg, dan sekaligus mengikuti tema aksen personal. */
+.toast {
+  background-color: var(--brand-accent-dark);
+  color: #fff;
+  box-shadow: var(--brand-shadow);
+}
+.toast .btn-close { filter: none; opacity: 0.85; }
+
+/* Statistik singkat di hero (dari profile.json) */
+.hero-stat { text-align: left; }
+.hero-stat .num { display: block; font-family: "Fraunces", Georgia, serif; font-size: 1.75rem; font-weight: 800; color: var(--brand-accent); line-height: 1; }
+.hero-stat .label { font-size: 0.8rem; color: var(--brand-ink-soft); }
+
+body {
+  font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, .navbar-brand {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+a { text-decoration: none; }
+
+/* Indikator fokus konsisten di seluruh halaman (aksesibilitas) */
+:focus-visible {
+  outline: 3px solid var(--brand-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 1080;
+  padding: 0.6rem 1rem;
+  background: var(--brand-ink);
+  color: #fff;
+  border-radius: 10px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+.text-accent { color: var(--brand-accent); }
+.bg-tint { background-color: var(--brand-tint); }
+
+/* Nama di hero: warna aksen + sapuan pink di bawah teks, seperti tugas Minggu 2 */
+.hero-name {
+  padding-inline: 0.06em;
+  color: var(--brand-accent);
+  background: linear-gradient(transparent 64%, var(--brand-soft) 64%, var(--brand-soft) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---------- 3. Navbar ---------- */
+/* Sengaja TIDAK memakai kelas utilitas .bg-dark (Bootstrap menandainya !important),
+   sehingga warna navbar bisa ditimpa cukup dengan selector .navbar biasa, tanpa !important. */
+.navbar {
+  background-color: var(--brand-ink);
+}
+.navbar-brand span { color: var(--brand-accent); }
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Bootstrap tidak selalu menyejajarkan tinggi .nav-link dengan .btn di
+   dalam .navbar-nav yang sama (keduanya punya padding vertikal bawaan
+   yang berbeda), sehingga tombol "Hubungi Saya" terlihat lebih tinggi
+   sendiri. Disamakan secara eksplisit di sini. */
+.navbar-nav { align-items: center; }
+.btn-nav-cta {
+  padding: 0.5rem 1.25rem;   /* padding vertikal sama seperti .nav-link (0.5rem) */
+  font-size: 0.875rem;
+}
+
+.btn-brand {
+  background-color: var(--brand-accent);
+  border-color: var(--brand-accent);
+  color: #fff;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.btn-brand:hover, .btn-brand:focus {
+  background-color: var(--brand-accent-dark);
+  border-color: var(--brand-accent-dark);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px -8px rgba(190, 24, 93, 0.55);
+}
+.btn-outline-brand {
+  color: var(--brand-accent-dark);
+  border: 2px solid var(--brand-soft);
+  font-weight: 700;
+  background: #fff;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.btn-outline-brand:hover {
+  background-color: var(--brand-soft);
+  border-color: #f6a9c5;
+  color: var(--brand-accent-dark);
+}
+
+/* ---------- 4. Hero: satu layar penuh, seperti tampilan Minggu 2 ---------- */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 4.5rem);   /* setinggi layar dikurangi tinggi navbar */
+  min-height: calc(100svh - 4.5rem);
+  display: flex;
+  align-items: center;
+  padding-block: 1.5rem 5.5rem;       /* ruang bawah untuk panah "Gulir" */
+  background: radial-gradient(circle at 85% 15%, var(--brand-tint) 0%, var(--brand-bg) 55%);
+}
+.hero-section .container { width: 100%; }
+.hero-row { padding-block: 1rem; }
+
+.hero-photo {
+  width: 100%;
+  max-width: clamp(260px, 26vw, 380px);
+  border-radius: 999px 999px var(--brand-radius) var(--brand-radius);
+  border: 6px solid #fff;
+  box-shadow: var(--brand-shadow);
+}
+
+/* Petunjuk gulir di bawah layar pertama */
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--brand-ink-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.scroll-hint:hover { color: var(--brand-accent-dark); }
+.scroll-hint svg { animation: gulir 1.8s ease-in-out infinite; }
+@keyframes gulir {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint svg { animation: none; }
+}
+@media (max-width: 991.98px) {
+  .hero-section { min-height: 0; padding-block: 2.5rem 4.5rem; }
+}
+.badge-soft {
+  background-color: var(--brand-soft);
+  color: var(--brand-accent-dark);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.4em 0.85em;
+}
+
+/* ---------- 5. Kartu proyek: mikro-interaksi hover ---------- */
+.project-card {
+  position: relative;
+  border-radius: var(--brand-radius);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--brand-shadow);
+}
+.card-banner img { transition: transform 0.4s ease; }
+.card-banner img.object-fit-cover { object-position: top; }  /* utamakan bagian atas tangkapan layar (biasanya judul/navbar) */
+.project-card:hover .card-banner img { transform: scale(1.05); }
+.project-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+}
+/* Scrim gradasi di atas tiap banner: menjaga lencana tetap terbaca dan
+   tidak "bertabrakan" dengan tulisan pada tangkapan layar, apa pun isi
+   gambarnya. Dipasang lewat ::after (bukan ::before), karena Bootstrap
+   sendiri memakai ::before pada elemen .ratio untuk menjaga rasio
+   tingginya -- kalau dipasang di ::before, aturan itu akan tertimpa dan
+   tinggi bannernya kolaps jadi nol. */
+.card-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(58, 29, 51, 0.55) 0%, rgba(58, 29, 51, 0) 45%);
+  pointer-events: none;
+}
+.tech-badge {
+  background-color: var(--brand-tint);
+  color: var(--brand-ink-soft);
+  border: 1px solid var(--bs-border-color);
+  font-weight: 600;
+  font-size: 0.72rem;
+  margin-right: 0.25rem;
+}
+
+.info-card { border-top: 4px solid var(--brand-accent); }
+
+.timeline { border-left: 2px solid var(--brand-soft); padding-left: 1.25rem; }
+.timeline li { margin-bottom: 0.85rem; }
+.timeline li strong { display: block; color: var(--brand-accent-dark); font-size: 0.85rem; }
+
+.skill-list li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.92rem;
+}
+.skill-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-accent);
+}
+
+/* ---------- 6. Tabel ---------- */
+caption { caption-side: top; color: var(--brand-ink); font-weight: 700; padding-top: 1rem; }
+.table thead { background-color: var(--brand-ink); color: #fff; }
+.table thead th { border: none; }
+
+/* ---------- 7. Formulir: floating labels & validasi ---------- */
+.form-floating > label { color: var(--brand-ink-soft); }
+.form-control, .form-select, .input-group-text {
+  border-color: #8a6a80;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 0.2rem rgba(190, 24, 93, 0.18);
+}
+.input-group-text { background-color: var(--brand-tint); color: var(--brand-accent-dark); }
+
+/* Bootstrap sudah menyediakan .was-validated .form-control:valid/:invalid;
+   di sini kita hanya menyelaraskan warnanya dengan tema personal. */
+.was-validated .form-control:valid,
+.was-validated .form-select:valid { border-color: #22c55e; }
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid { border-color: #b91c1c; }
+
+#form-status:not(:empty) {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background-color: var(--brand-soft);
+  color: var(--brand-accent-dark);
+  border-left: 4px solid var(--brand-accent);
+}
+
+/* ---------- 8. Modal ---------- */
+.modal-content { border: none; box-shadow: 0 30px 60px -20px rgba(58, 29, 51, 0.45); }
+.modal-header { border-bottom: 1px solid var(--bs-border-color); }
+.modal-footer { border-top: 1px solid var(--bs-border-color); background: var(--brand-bg); }
+
+/* ---------- 9. Footer ---------- */
+.site-footer {
+  background-color: var(--brand-ink);
+  color: #f7e3ec;
+}
+.site-footer a { color: #fbd5e5; }
+.site-footer a:hover { color: #fff; }
+
+/* ---------- 10. Aksesibilitas: hormati preferensi kurangi gerakan ---------- */
+/* Menimpa transform pada state :hover yang sama persis (spesifisitas setara,
+   menang karena urutan deklarasi di cascade) sehingga tidak perlu !important. */
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover,
+  .project-card:hover .card-banner img,
+  .btn-brand:hover {
+    transform: none;
+    transition: none;
+  }
+}

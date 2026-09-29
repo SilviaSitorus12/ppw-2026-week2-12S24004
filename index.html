@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Custom CSS: WAJIB dimuat setelah Bootstrap, agar override berlaku -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/custom-style.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="90" tabindex="0">
 
@@ -58,18 +58,18 @@
           <div class="col-lg-7">
             <span class="badge rounded-pill badge-soft mb-3">UI/UX Designer &amp; Front-End Developer</span>
             <h1 id="judul-hero" class="display-4 fw-bold mb-3">
-              Halo, saya <span class="hero-name">Silvia Eklesiana Sitorus.</span>
+              Halo, saya <span class="hero-name" id="heroName">Silvia Eklesiana Sitorus.</span>
             </h1>
-            <p class="lead text-body-secondary mb-4" style="max-width: 42rem;">
+            <p class="lead text-body-secondary mb-4" id="heroTagline" style="max-width: 42rem;">
               Mahasiswa S1 Sistem Informasi Institut Teknologi Del. Saya merancang pengalaman
-              digital lewat UI/UX dan pengembangan perangkat lunak. Halaman ini kini dibangun
-              di atas Bootstrap 5.3 dengan tema warna personal saya sendiri.
+              digital lewat UI/UX dan pengembangan perangkat lunak.
             </p>
             <ul class="list-inline mb-4">
               <li class="list-inline-item badge rounded-pill badge-soft mb-2">UI/UX Design</li>
               <li class="list-inline-item badge rounded-pill badge-soft mb-2">Front-end</li>
               <li class="list-inline-item badge rounded-pill badge-soft mb-2">Analisis sistem</li>
             </ul>
+            <div id="heroStats" class="d-flex flex-wrap gap-4 mb-4" aria-live="polite"></div>
             <div class="d-flex flex-wrap gap-3">
               <a href="#portofolio" class="btn btn-brand btn-lg rounded-pill px-4">Lihat portofolio</a>
               <a href="#layanan" class="btn btn-outline-brand btn-lg rounded-pill px-4">Pesan konsultasi</a>
@@ -77,7 +77,7 @@
           </div>
           <div class="col-lg-5 text-center">
             <!-- FOTO: ganti file assets/profile.jpeg dengan fotomu (nama file tetap sama) -->
-            <img src="assets/profile.jpeg" alt="Foto profil Silvia Eklesiana Sitorus" class="hero-photo img-fluid">
+            <img src="assets/profile.jpeg" alt="Foto profil Silvia Eklesiana Sitorus" class="hero-photo img-fluid" id="heroPhoto">
           </div>
         </div>
       </div>
@@ -194,120 +194,36 @@
     <section id="portofolio" class="py-5 bg-tint" aria-labelledby="judul-portofolio">
       <div class="container py-4">
         <h2 id="judul-portofolio" class="fw-bold mb-2">Portofolio karya</h2>
-        <p class="text-body-secondary mb-4">Lima proyek desain dan pengembangan. Klik <strong>Lihat detail</strong> untuk membuka ringkasan proyek.</p>
+        <p class="text-body-secondary mb-4">
+          Data proyek di bawah ini dimuat secara dinamis dari <code>data/projects.json</code>.
+          Klik <strong>Lihat detail</strong> untuk membuka ringkasan proyek di jendela modal.
+        </p>
 
-        <!-- Grid Bootstrap 12-kolom responsif -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Filter kategori: tombol dibuat otomatis oleh app.js dari kategori unik di projects.json -->
+        <div id="categoryFilters" class="d-flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter kategori proyek"></div>
 
-          <!-- Kartu 1: GLOBORA -->
-          <div class="col">
-            <article class="card h-100 border-0 shadow-sm project-card">
-              <div class="ratio ratio-4x3 card-banner">
-                <img src="assets/globora.png" class="object-fit-cover" alt="Tangkapan layar rancangan antarmuka GLOBORA">
-              </div>
-              <span class="badge rounded-pill badge-soft project-badge">Platform pariwisata</span>
-              <div class="card-body d-flex flex-column">
-                <h3 class="h5 fw-bold">GLOBORA</h3>
-                <p class="small text-accent fw-semibold mb-2">UI/UX Designer &amp; Business Analyst</p>
-                <p class="card-text small text-body-secondary flex-grow-1">Platform pariwisata terpadu yang mempromosikan wisata lokal dan memperkaya pengalaman perjalanan wisatawan.</p>
-                <div class="mb-3">
-                  <span class="badge tech-badge">Figma</span>
-                  <span class="badge tech-badge">Canva</span>
-                </div>
-                <button type="button" class="btn btn-brand btn-sm rounded-pill mt-auto" data-bs-toggle="modal" data-bs-target="#modalGlobora">
-                  Lihat detail
-                </button>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 2: Imuniku -->
-          <div class="col">
-            <article class="card h-100 border-0 shadow-sm project-card">
-              <div class="ratio ratio-4x3 card-banner">
-                <img src="assets/imuniku.png" class="object-fit-cover" alt="Tangkapan layar rancangan aplikasi Imuniku">
-              </div>
-              <span class="badge rounded-pill badge-soft project-badge">Aplikasi</span>
-              <div class="card-body d-flex flex-column">
-                <h3 class="h5 fw-bold">Imuniku</h3>
-                <p class="small text-accent fw-semibold mb-2">UI/UX Designer</p>
-                <p class="card-text small text-body-secondary flex-grow-1">Aplikasi pemantauan imunisasi anak yang membantu orang tua menjaga kesehatan anaknya.</p>
-                <div class="mb-3">
-                  <span class="badge tech-badge">Figma</span>
-                  <span class="badge tech-badge">Maze</span>
-                </div>
-                <button type="button" class="btn btn-brand btn-sm rounded-pill mt-auto" data-bs-toggle="modal" data-bs-target="#modalImuniku">
-                  Lihat detail
-                </button>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 3: Labersa -->
-          <div class="col">
-            <article class="card h-100 border-0 shadow-sm project-card">
-              <div class="ratio ratio-4x3 card-banner">
-                <img src="assets/labersa.png" class="object-fit-cover" alt="Tangkapan layar rancangan Labersa Sport Center">
-              </div>
-              <span class="badge rounded-pill badge-soft project-badge">Sistem informasi</span>
-              <div class="card-body d-flex flex-column">
-                <h3 class="h5 fw-bold">Labersa Sport Center IS</h3>
-                <p class="small text-accent fw-semibold mb-2">System Analyst &amp; UI/UX Designer</p>
-                <p class="card-text small text-body-secondary flex-grow-1">Sistem informasi reservasi dan pengelolaan berbasis web untuk Labersa Sport Center.</p>
-                <div class="mb-3">
-                  <span class="badge tech-badge">Figma</span>
-                  <span class="badge tech-badge">Analisis sistem</span>
-                </div>
-                <a href="https://www.figma.com/design/mq0gXGzPreqN0ibt8bnhre/Untitled" target="_blank" rel="noopener"
-                   class="btn btn-brand btn-sm rounded-pill mt-auto">Lihat desain Labersa</a>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 4: DummyMine -->
-          <div class="col">
-            <article class="card h-100 border-0 shadow-sm project-card">
-              <div class="ratio ratio-4x3 card-banner">
-                <img src="assets/dummymine.jpg" class="object-fit-cover" alt="Tangkapan layar game DummyMine">
-              </div>
-              <span class="badge rounded-pill badge-soft project-badge">Game</span>
-              <div class="card-body d-flex flex-column">
-                <h3 class="h5 fw-bold">DummyMine</h3>
-                <p class="small text-accent fw-semibold mb-2">Python Game Developer</p>
-                <p class="card-text small text-body-secondary flex-grow-1">Game sandbox bergaya Minecraft yang dibangun dengan Python dan prinsip pemrograman berorientasi objek.</p>
-                <div class="mb-3">
-                  <span class="badge tech-badge">Python</span>
-                  <span class="badge tech-badge">OOP</span>
-                </div>
-                <a href="https://github.com/SilviaSitorus12/dummymine" target="_blank" rel="noopener"
-                   class="btn btn-brand btn-sm rounded-pill mt-auto">Lihat kode DummyMine</a>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 5: NextStep AI -->
-          <div class="col">
-            <article class="card h-100 border-0 shadow-sm project-card">
-              <div class="ratio ratio-4x3 card-banner">
-                <img src="assets/nextstep.png" class="object-fit-cover" alt="Tangkapan layar NextStep AI">
-              </div>
-              <span class="badge rounded-pill badge-soft project-badge">Platform AI</span>
-              <div class="card-body d-flex flex-column">
-                <h3 class="h5 fw-bold">NextStep AI</h3>
-                <p class="small text-accent fw-semibold mb-2">Front-End Developer</p>
-                <p class="card-text small text-body-secondary flex-grow-1">Platform panduan karier berbasis AI yang membantu mahasiswa menjelajahi pilihan karier.</p>
-                <div class="mb-3">
-                  <span class="badge tech-badge">HTML</span>
-                  <span class="badge tech-badge">CSS</span>
-                  <span class="badge tech-badge">JavaScript</span>
-                </div>
-                <a href="https://github.com/SilviaSitorus12/nextstep" target="_blank" rel="noopener"
-                   class="btn btn-brand btn-sm rounded-pill mt-auto">Lihat kode NextStep AI</a>
-              </div>
-            </article>
-          </div>
-
+        <!-- ===== STATUS: LOADING (skeleton) — tampil saat fetch() belum selesai ===== -->
+        <div id="portfolioLoading" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" aria-hidden="true">
+          <div class="col"><div class="card h-100 border-0 shadow-sm skeleton-card"><div class="skeleton-banner placeholder-glow"><span class="placeholder col-12 h-100"></span></div><div class="card-body"><span class="placeholder col-6 mb-2 d-block"></span><span class="placeholder col-8 d-block"></span></div></div></div>
+          <div class="col"><div class="card h-100 border-0 shadow-sm skeleton-card"><div class="skeleton-banner placeholder-glow"><span class="placeholder col-12 h-100"></span></div><div class="card-body"><span class="placeholder col-6 mb-2 d-block"></span><span class="placeholder col-8 d-block"></span></div></div></div>
+          <div class="col"><div class="card h-100 border-0 shadow-sm skeleton-card"><div class="skeleton-banner placeholder-glow"><span class="placeholder col-12 h-100"></span></div><div class="card-body"><span class="placeholder col-6 mb-2 d-block"></span><span class="placeholder col-8 d-block"></span></div></div></div>
         </div>
+
+        <!-- ===== STATUS: ERROR — tampil kalau fetch() gagal (404, JSON rusak, dsb.) ===== -->
+        <div id="portfolioError" class="alert alert-danger d-none" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <span id="portfolioErrorMessage">Gagal memuat data proyek. Periksa koneksi internet Anda, lalu muat ulang halaman.</span>
+        </div>
+
+        <!-- ===== STATUS: EMPTY — tampil kalau filter kategori tidak punya hasil ===== -->
+        <div id="portfolioEmpty" class="alert alert-secondary d-none" role="status">
+          <i class="bi bi-inbox me-2"></i>
+          Belum ada proyek pada kategori ini.
+        </div>
+
+        <!-- ===== STATUS: SUCCESS — grid kartu proyek, diisi app.js ===== -->
+        <div id="portfolioGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" aria-live="polite"></div>
+
 
         <!-- ===== TABEL REKAP CAPAIAN ===== -->
         <h3 class="h5 fw-bold mt-5 mb-3">Rekap capaian</h3>
@@ -374,7 +290,10 @@
     <!-- ===== SECTION: FORMULIR LAYANAN (Bootstrap: floating labels, input group, validasi) ===== -->
     <section id="layanan" class="py-5" aria-labelledby="judul-layanan">
       <div class="container py-4">
-        <h2 id="judul-layanan" class="fw-bold mb-2">Formulir layanan konsultasi</h2>
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+          <h2 id="judul-layanan" class="fw-bold mb-0">Formulir layanan konsultasi</h2>
+          <span id="orderHistoryBadge" class="badge rounded-pill badge-soft d-none" title="Riwayat permintaan tersimpan di perangkat ini"></span>
+        </div>
         <p class="text-body-secondary mb-4">Ceritakan kebutuhan desain atau website Anda. Kolom bertanda <span class="text-danger">*</span> wajib diisi.</p>
 
         <div class="row gy-4">
@@ -454,89 +373,71 @@
               </div>
 
               <div class="col-12">
-                <button type="submit" class="btn btn-brand btn-lg rounded-pill px-5">
-                  Kirim permintaan konsultasi
+                <button type="submit" id="submitBtn" class="btn btn-brand btn-lg rounded-pill px-5">
+                  <span id="submitBtnText">Kirim permintaan konsultasi</span>
                 </button>
                 <p id="form-status" class="mt-3 mb-0 fw-semibold" role="status" aria-live="polite"></p>
               </div>
             </form>
           </div>
 
-          <!-- Panel layanan yang tersedia -->
+          <!-- Panel layanan yang tersedia — diisi dinamis dari data/services.json -->
           <aside class="col-lg-4">
             <div class="p-4 rounded-4 bg-tint h-100">
               <h3 class="h5 fw-bold mb-3">Layanan yang tersedia</h3>
-              <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                <li class="p-2 px-3 bg-white rounded-3 small fw-semibold"><i class="bi bi-palette text-accent me-2"></i>Desain UI/UX (Figma)</li>
-                <li class="p-2 px-3 bg-white rounded-3 small fw-semibold"><i class="bi bi-window text-accent me-2"></i>Website atau landing page</li>
-                <li class="p-2 px-3 bg-white rounded-3 small fw-semibold"><i class="bi bi-diagram-3 text-accent me-2"></i>Analisis dan perancangan sistem</li>
-                <li class="p-2 px-3 bg-white rounded-3 small fw-semibold"><i class="bi bi-eye text-accent me-2"></i>Review usability dan aksesibilitas</li>
-              </ul>
+
+              <!-- status loading -->
+              <div id="servicesLoading" class="d-flex flex-column gap-2" aria-hidden="true">
+                <span class="placeholder-glow"><span class="placeholder col-12" style="height:2.5rem;border-radius:.75rem;"></span></span>
+                <span class="placeholder-glow"><span class="placeholder col-12" style="height:2.5rem;border-radius:.75rem;"></span></span>
+                <span class="placeholder-glow"><span class="placeholder col-12" style="height:2.5rem;border-radius:.75rem;"></span></span>
+              </div>
+
+              <!-- status error -->
+              <div id="servicesError" class="alert alert-danger small d-none" role="alert">
+                Gagal memuat daftar layanan.
+              </div>
+
+              <!-- status sukses -->
+              <ul id="servicesList" class="list-unstyled d-flex flex-column gap-2 mb-0"></ul>
             </div>
           </aside>
+
         </div>
       </div>
     </section>
 
   </main>
-
-  <!-- ===================== MODAL 1: GLOBORA ===================== -->
-  <div class="modal fade" id="modalGlobora" tabindex="-1" aria-labelledby="modalGloboraLabel" aria-hidden="true">
+  <!-- ===================== MODAL UNIVERSAL: satu elemen untuk seluruh proyek ===================== -->
+  <!-- Isinya diinjeksi dinamis oleh app.js (openProjectModal) sesuai id proyek yang diklik. -->
+  <div class="modal fade" id="universalProjectModal" tabindex="-1" aria-labelledby="projectModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content rounded-4">
         <div class="modal-header">
-          <h3 class="modal-title h5 fw-bold" id="modalGloboraLabel">Detail Proyek: GLOBORA</h3>
+          <h3 class="modal-title h5 fw-bold" id="projectModalTitle">Detail Proyek</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
-        <div class="modal-body">
-          <img src="assets/globora.png" alt="Tangkapan layar rancangan antarmuka GLOBORA" class="img-fluid rounded-3 mb-3">
-          <p><strong>Peran:</strong> UI/UX Designer &amp; Business Analyst</p>
-          <p>GLOBORA adalah platform pariwisata terpadu yang membantu wisatawan menemukan
-            destinasi lokal. Saya bertanggung jawab pada riset pengguna, penyusunan wireframe,
-            hingga prototipe interaktif di Figma, serta analisis kebutuhan bisnis platform.</p>
-          <div>
-            <span class="badge tech-badge">Riset Pengguna</span>
-            <span class="badge tech-badge">Wireframe</span>
-            <span class="badge tech-badge">Prototipe Interaktif</span>
-          </div>
+        <div class="modal-body" id="projectModalBody">
+          <!-- konten proyek disisipkan di sini oleh app.js -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-brand rounded-pill" data-bs-dismiss="modal">Tutup</button>
-          <a href="https://www.figma.com/design/WTyEKYrKFgQfdNl4Haerdf/dianita-ginting21-s-team-library" target="_blank" rel="noopener" class="btn btn-brand rounded-pill">Buka di Figma</a>
+          <a href="#" id="projectModalLink" target="_blank" rel="noopener" class="btn btn-brand rounded-pill">Buka tautan</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== MODAL 2: IMUNIKU ===================== -->
-  <div class="modal fade" id="modalImuniku" tabindex="-1" aria-labelledby="modalImunikuLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content rounded-4">
-        <div class="modal-header">
-          <h3 class="modal-title h5 fw-bold" id="modalImunikuLabel">Detail Proyek: Imuniku</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-        </div>
-        <div class="modal-body">
-          <img src="assets/imuniku.png" alt="Tangkapan layar rancangan aplikasi Imuniku" class="img-fluid rounded-3 mb-3">
-          <p><strong>Peran:</strong> UI/UX Designer</p>
-          <p>Imuniku membantu orang tua memantau jadwal dan status imunisasi anak. Saya merancang
-            alur pengingat jadwal, kartu riwayat imunisasi, dan menguji kegunaannya lewat sesi
-            pengujian pengguna memakai Maze.</p>
-          <div>
-            <span class="badge tech-badge">UI Kit</span>
-            <span class="badge tech-badge">Usability Testing</span>
-            <span class="badge tech-badge">Onboarding</span>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-brand rounded-pill" data-bs-dismiss="modal">Tutup</button>
-          <a href="https://www.figma.com/design/1krxirOo93xABqEIKacb66/ImuniKu_-UI-UX" target="_blank" rel="noopener" class="btn btn-brand rounded-pill">Buka di Figma</a>
-        </div>
+  <!-- ===================== TOAST: umpan balik pengiriman formulir (tanpa reload) ===================== -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
+    <div id="orderToast" class="toast align-items-center border-0" role="status" aria-live="polite" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="orderToastBody">Permintaan konsultasi berhasil dikirim.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer py-4">
     <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
       <p class="mb-0 small">&copy; 2026 Silvia Eklesiana Sitorus.</p>
@@ -555,31 +456,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-  <!--
-    Skrip validasi form Bootstrap 5 (resmi dari dokumentasi Bootstrap):
-    https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
-    Fungsinya HANYA menambahkan kelas "was-validated" setelah tombol kirim
-    ditekan, agar kotak .invalid-feedback / .valid-feedback yang sudah
-    disiapkan Bootstrap di CSS-nya bisa tampil. Bukan skrip buatan sendiri
-    di luar Bootstrap, dan bukan pengganti validasi HTML5 (required, type,
-    pattern) yang tetap menjadi validasi utamanya.
-  -->
-  <script>
-    (() => {
-      "use strict";
-      const form = document.getElementById("form-konsultasi");
-      const status = document.getElementById("form-status");
-      form.addEventListener("submit", (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else {
-          event.preventDefault(); // situs statis: GitHub Pages tidak punya server
-          status.textContent = "Terima kasih, permintaan konsultasi Anda sudah tercatat.";
-        }
-        form.classList.add("was-validated");
-      }, false);
-    })();
-  </script>
+  <!-- Data Access Layer dimuat lebih dulu, baru Presentation Layer -->
+  <script src="js/api-service.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

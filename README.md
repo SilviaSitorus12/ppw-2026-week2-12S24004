@@ -1,118 +1,174 @@
-# Portofolio Silvia Eklesiana Sitorus — Minggu 3 (Bootstrap 5)
+# Portofolio Silvia Eklesiana Sitorus — Minggu 4 (Arsitektur Decoupled & CSR)
 
-Modernisasi dan refactoring **Personal Portfolio & Service Portal** dari Minggu 2, kini
-dibangun di atas **Bootstrap 5.3** dan **Custom CSS Overrides**, untuk mata kuliah
-**Pemrograman dan Pengujian Aplikasi Web (12S3101)**, Institut Teknologi Del.
+Transformasi arsitektural dari **Personal Portfolio & Service Portal** Minggu 3 (Bootstrap 5,
+data statis) menjadi aplikasi web ber-arsitektur **decoupled multi-tier**, dengan **Dynamic
+Client-Side Rendering (CSR)**, untuk mata kuliah **Pemrograman dan Pengujian Aplikasi Web
+(12S3101)**, Institut Teknologi Del.
 
-Proyek ini adalah **refactoring**, bukan proyek baru: dikembangkan di branch `week3-bootstrap`
-pada repositori Minggu 2 yang sama, sesuai ketentuan tugas.
+Proyek ini adalah **refactoring**, dikembangkan di branch `week4-architecture` pada
+repositori yang sama dengan Minggu 2 dan 3.
 
 | | |
 |---|---|
 | **Nama** | Silvia Eklesiana Sitorus |
 | **NIM** | 12S24004 |
 | **Kelas** | S1 Sistem Informasi |
-| **Live demo** | https://silviasitorus12.github.io/ppw-2026-week2-12S24004/ *(tampil setelah GitHub Pages diarahkan ke branch `week3-bootstrap`, lihat bagian Deployment)* |
-| **Repositori — branch Minggu 3** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004/tree/week3-bootstrap |
-| **Repositori — branch Minggu 2 (`main`, tidak diubah)** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004 |
+| **Live demo** | https://silviasitorus12.github.io/ppw-2026-week2-12S24004/ *(tampil setelah GitHub Pages diarahkan ke branch `week4-architecture`)* |
+| **Repositori — branch Minggu 4** | https://github.com/SilviaSitorus12/ppw-2026-week2-12S24004/tree/week4-architecture |
 
-## Tampilan
+## Diagram Arsitektur (C4 Container Model)
 
-| Sebelum (Minggu 2) | Sesudah (Minggu 3) |
-|---|---|
-| <img src="screenshots/sebelum-desktop.png" alt="Tampilan desktop Minggu 2" width="360"> | <img src="screenshots/sesudah-desktop.png" alt="Tampilan desktop Minggu 3" width="360"> |
-| <img src="screenshots/sebelum-mobile.png" alt="Tampilan mobile Minggu 2" width="180"> | <img src="screenshots/sesudah-mobile.png" alt="Tampilan mobile Minggu 3" width="180"> |
+```mermaid
+graph TD
+  A["Pengunjung (Person)"] -->|membuka browser| B
 
-## Ringkasan Pembaruan
+  subgraph Presentation Tier
+    B["Client: index.html, app.js<br/>(kontrol tampilan & DOM)"]
+  end
 
-Halaman ini tetap mempertahankan **identitas dan struktur semantik HTML5** dari Minggu 2
-(`header`, `nav`, `main`, `section`, `article`, `aside`, `footer`), lalu direfaktor untuk
-memakai sistem grid dan komponen Bootstrap 5, ditimpa tema warna personal lewat `style.css`.
+  subgraph Static Server / CDN
+    C["GitHub Pages<br/>(menyajikan berkas statis)"]
+  end
 
-## Tabel Komparasi: Sebelum vs Sesudah Integrasi Framework
+  subgraph "Application / Service Logic Tier"
+    D["api-service.js<br/>(Data Access Layer)"]
+    E["data/projects.json"]
+    F["data/services.json"]
+    G["data/profile.json"]
+    H["submitServiceOrder()<br/>(mock REST endpoint)"]
+  end
 
-| Aspek | Sebelum (Minggu 2 — CSS murni) | Sesudah (Minggu 3 — Bootstrap 5.3) |
+  subgraph Data Storage Tier
+    I[("localStorage<br/>riwayat pesanan")]
+  end
+
+  B -->|"GET index.html, css/, js/"| C
+  B -->|memanggil| D
+  D -->|"fetch() GET"| E
+  D -->|"fetch() GET"| F
+  D -->|"fetch() GET"| G
+  B -->|"submit formulir (POST simulasi)"| H
+  H --> D
+  B -->|simpan riwayat| I
+```
+
+### Narasi Separation of Concerns
+
+Ketiga lapisan dipisah agar masing-masing hanya bertanggung jawab pada satu hal:
+
+- **Presentation Tier** (`app.js`) hanya mengurus tampilan — merender kartu, membuka modal,
+  menampilkan status UI. Ia tidak tahu dan tidak peduli dari mana data berasal.
+- **Application/Service Logic Tier** (`api-service.js` + berkas JSON) adalah satu-satunya
+  bagian yang tahu cara mengambil data. Kalau suatu saat `projects.json` diganti dengan API
+  sungguhan (mis. `https://api.contoh.com/projects`), cukup fungsi di dalam `api-service.js`
+  yang berubah — `app.js` tidak perlu disentuh sama sekali, karena keduanya tetap
+  berkomunikasi lewat bentuk data yang sama (Promise berisi array/objek JSON).
+- **Data Storage Tier** (`localStorage`) menyimpan riwayat pesanan di perangkat pengunjung
+  sendiri, terpisah dari data proyek yang sifatnya baca-saja (read-only).
+
+Pemisahan ini disebut *decoupled* karena setiap lapisan bisa diganti secara independen tanpa
+merombak lapisan lain — ciri utama arsitektur web kontemporer dibanding pendekatan monolitik
+Minggu 2-3, yang menyatukan data dan tampilan dalam satu berkas HTML.
+
+## Tabel Komparasi: Sebelum vs Sesudah Refactoring
+
+| Aspek | Sebelum (Minggu 3 — Statis) | Sesudah (Minggu 4 — Dynamic CSR) |
 |---|---|---|
-| **Tata letak** | `display: grid` dan `display: flex` kustom di `style.css` | Sistem grid 12-kolom Bootstrap: `row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4` |
-| **Navigasi** | `<header>` statis dengan `<nav>` sederhana, tanpa menu mobile | `navbar navbar-expand-lg navbar-dark sticky-top` dengan tombol hamburger (`navbar-toggler` + `collapse`) yang berfungsi penuh di ponsel |
-| **Kartu proyek** | Kartu `<article class="card">` kustom, tautan langsung ke Figma/GitHub | Kartu Bootstrap (`.card`, `.ratio`, `.badge`) + **Bootstrap Modal** untuk 2 proyek (GLOBORA, Imuniku) yang menampilkan detail tanpa berpindah halaman |
-| **Formulir** | `<input class="form-control">` kustom dengan `<label>` di atas input | **Floating Labels** (`.form-floating`), **Input Group** berikon Bootstrap Icons, serta umpan balik validasi visual (`.is-valid` / `.is-invalid`, `.valid-feedback` / `.invalid-feedback`) |
-| **Menu aktif saat digulir** | Skrip `IntersectionObserver` buatan sendiri di `script.js` | Fitur bawaan **Bootstrap Scrollspy** (`data-bs-spy="scroll"` pada `<body>`), tanpa satu baris JavaScript kustom |
-| **Responsivitas** | Satu breakpoint kustom `@media (max-width: 768px)` | Breakpoint Bootstrap berjenjang: `sm` (≥576px), `md` (≥768px), `lg` (≥992px), `xl` (≥1200px) |
-| **Ikon** | SVG inline buatan sendiri | Paket **Bootstrap Icons** via CDN (`bi bi-envelope`, `bi bi-telephone`, dst.) |
-| **Tema warna** | Custom property di `:root`, dipakai langsung di selector kustom | Custom property yang sama, kini **dipetakan ke variabel Bootstrap** (`--bs-primary`, `--bs-link-color`, dst.) agar seluruh komponen Bootstrap otomatis mengikuti tema personal |
-| **Berkas kode** | `index.html`, `style.css`, `script.js` (tiga berkas) | `index.html` dan `style.css` saja. `style.css` dimuat **setelah** `bootstrap.min.css` (CDN) agar override berjalan tanpa `!important`. Tidak ada `script.js` lagi — validasi formulir memakai delapan baris skrip resmi dari dokumentasi Bootstrap, ditulis inline di `index.html` |
+| **Sumber data kartu proyek** | Ditulis langsung (hardcoded) di `index.html` | Dimuat dari `data/projects.json` lewat `fetch()` asinkron |
+| **Jumlah modal** | 2 modal terpisah (GLOBORA, Imuniku) | **1 modal universal**, isinya diganti dinamis berdasarkan `data-project-id` |
+| **Status antarmuka** | Tidak ada; kartu langsung tampil penuh | 4 status dikelola: Loading (skeleton), Success, Empty (filter kosong), Error (alert) |
+| **Filter kategori** | Tidak ada | Tombol filter dibuat otomatis dari kategori unik di `projects.json`, filter instan tanpa reload |
+| **Formulir** | Simulasi validasi saja, tidak benar-benar "terkirim" | Dikirim asinkron ke `ApiService.submitServiceOrder()`, umpan balik lewat **Bootstrap Toast**, tanpa reload halaman |
+| **Riwayat pesanan** | Tidak disimpan | Disimpan ke `localStorage`, ditampilkan sebagai badge jumlah riwayat |
+| **Keamanan** | Tidak relevan (data statis) | Setiap data yang dirender ke `innerHTML` melewati `escapeHTML()` untuk mencegah DOM-based XSS |
+| **Struktur berkas** | `index.html`, `style.css` | `index.html`, `css/custom-style.css`, `data/*.json` (3 berkas), `js/api-service.js`, `js/app.js` |
 
-## Pemenuhan Spesifikasi Tugas Minggu 3
+## Profil Kinerja (DevTools Network)
+
+> Diisi setelah situs live aktif. Buka DevTools (F12) → tab **Network**, muat halaman dua
+> kali: sekali dengan cache dikosongkan (**Cold Load**, klik kanan tombol reload → *Empty
+> Cache and Hard Reload*), sekali lagi dengan reload biasa (**Warm Load**).
+
+| Metrik | Cold Load | Warm Load |
+|---|---|---|
+| Time to First Byte (TTFB) | *(isi, mis. 45 ms)* | *(isi)* |
+| First Contentful Paint (FCP) | *(isi)* | *(isi)* |
+| Jumlah request | *(isi)* | *(isi)* |
+| Total ukuran transfer | *(isi)* | *(isi)* |
+| Request dengan status `304 Not Modified` | 0 (belum ada cache) | *(isi jumlahnya)* |
+
+**Screenshot waterfall:**
+
+`screenshots/devtools-cold-load.png` dan `screenshots/devtools-warm-load.png`
+
+*(Tempel gambarnya di folder `screenshots/` lalu tambahkan di sini dengan
+`![Cold load](screenshots/devtools-cold-load.png)`)*
+
+## Pemenuhan Spesifikasi Tugas Minggu 4
 
 | Area evaluasi (bobot) | Implementasi |
 |---|---|
-| **Fondasi framework & semantik (15%)** | Bootstrap 5.3.3 CSS + JS Bundle dan Bootstrap Icons via CDN; struktur semantik HTML5 tetap utuh; `meta viewport` valid; `style.css` dimuat setelah Bootstrap |
-| **Responsive navbar & hero (20%)** | Navbar `sticky-top` dengan brand identity; tombol hamburger berfungsi tanpa error console; Hero Section satu layar penuh dengan CTA ganda dan petunjuk gulir |
-| **Grid portofolio & modal (20%)** | 5 kartu proyek dalam grid `row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`; tiap kartu memuat banner, badge teknologi, deskripsi, dan tombol seragam; 2 modal dengan konten berbeda (GLOBORA, Imuniku) |
-| **Modernisasi formulir (15%)** | Floating Labels untuk nama, jenis layanan, target, dan pesan; Input Group berikon untuk email dan telepon; select kategori; checkbox syarat; validasi visual lewat pola resmi Bootstrap `needs-validation` |
-| **Custom overrides & theming (15%)** | 9 variabel CSS pada `:root`; palet warna personal (plum, rose, blush); mikro-interaksi hover pada kartu dan tombol; **nol** penggunaan `!important` |
-| **Git & deployment (15%)** | Branch `week3-bootstrap` dari repo Minggu 2 (branch `main` tidak diubah); README ini memuat tabel komparasi dan screenshot; terpublikasi di GitHub Pages |
+| **Pemodelan arsitektur (15%)** | Diagram C4 Container di atas (Mermaid), memetakan Client, Static Server/CDN, JSON Providers, dan mock REST endpoint, disertai narasi Separation of Concerns |
+| **Dekomposisi data JSON (20%)** | `data/projects.json` (5 proyek, lengkap dengan `tags`, `metrics`, `thumbnail`, `link`), `data/services.json` (4 layanan), `data/profile.json` |
+| **Dynamic CSR & UI States (25%)** | `index.html` bersih dari kartu hardcoded; rendering lewat `async/await`; 4 status (loading/success/empty/error) terkelola di `app.js`; filter kategori instan tanpa reload |
+| **Modal universal (15%)** | Satu elemen `#universalProjectModal`; `openProjectModal(id)` menyuntik konten sesuai id; semua teks melalui `escapeHTML()` |
+| **Formulir asinkron & state lokal (20%)** | `fetch`/Promise via `ApiService.submitServiceOrder()`, tombol submit nonaktif + spinner saat mengirim, umpan balik **Bootstrap Toast**, riwayat tersimpan di `localStorage` dan ditampilkan sebagai badge |
+| **Profiling DevTools & Git (10%)** | Tabel dan screenshot di atas; branch `week4-architecture`; commit deskriptif |
 
 ## Struktur Folder
 
 ```
-ppw-2026-week2-12S24004/            (repositori, branch week3-bootstrap)
-├── index.html
-├── style.css
-├── README.md
-├── assets/                         (dipakai bersama dengan branch main)
-│   ├── profile.jpeg
-│   ├── globora.png / imuniku.png / labersa.png / dummymine.jpg / nextstep.png
-│   └── sertifikat-*.pdf / .png
+ppw-2026-week2-12S24004/            (repositori, branch week4-architecture)
+├── index.html                      (shell bersih, tanpa kartu hardcoded)
+├── css/
+│   └── custom-style.css            (dari Minggu 3, ditambah gaya skeleton & toast)
+├── data/
+│   ├── profile.json
+│   ├── projects.json
+│   └── services.json
+├── js/
+│   ├── api-service.js              (Data Access Layer)
+│   └── app.js                      (Presentation Layer)
+├── assets/                         (dipakai bersama semua branch)
 └── screenshots/
-    ├── sebelum-desktop.png / sebelum-mobile.png
-    └── sesudah-desktop.png / sesudah-mobile.png
+    └── devtools-*.png
 ```
 
 ## Menjalankan di Komputer Lokal
 
-1. Clone repositori, lalu pindah ke branch ini: `git checkout week3-bootstrap`.
-2. Buka folder di Visual Studio Code.
-3. Klik kanan `index.html` → **Open with Live Server**.
+1. Clone repositori, lalu `git checkout week4-architecture`.
+2. Buka folder di VS Code, klik kanan `index.html` → **Open with Live Server**.
 
-Bootstrap, Bootstrap Icons, dan Google Fonts dimuat lewat CDN, sehingga koneksi internet
-diperlukan agar tampilan sesuai rancangan.
+**Penting:** karena `index.html` sekarang memuat data lewat `fetch()`, membukanya langsung
+dengan cara *double-click* (protokol `file://`) **tidak akan berfungsi** — browser memblokir
+`fetch()` ke berkas lokal atas alasan keamanan (kebijakan CORS). Harus lewat server lokal
+seperti Live Server, bukan dibuka langsung dari File Explorer.
 
 ## Deployment
 
 ```bash
 cd ppw-2026-week2-12S24004
-git checkout -b week3-bootstrap
+git checkout -b week4-architecture
 git add .
-git commit -m "feat(week3): refactor portfolio to bootstrap 5 grid and modern components"
-git push -u origin week3-bootstrap
+git commit -m "feat(week4): decouple architecture to json data providers and async CSR"
+git push -u origin week4-architecture
 ```
 
-Lalu di GitHub: **Settings → Pages → Branch: `week3-bootstrap` → Save**. Alamat live demo-nya
-tetap sama seperti Minggu 2, isinya yang berganti mengikuti branch yang dipilih di sini.
+Lalu **Settings → Pages → Branch: `week4-architecture` → Save**.
 
 ## Catatan
 
-- Halaman ini **tidak memiliki berkas `script.js`**. Satu-satunya JavaScript yang dipakai
-  adalah delapan baris skrip validasi resmi dari
-  [dokumentasi Bootstrap 5](https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles),
-  ditulis inline di `index.html`, fungsinya hanya menambahkan kelas `was-validated` agar
-  kotak umpan balik validasi Bootstrap tampil. Navbar, modal, dan menu aktif saat digulir
-  (Scrollspy) semuanya bawaan Bootstrap lewat atribut `data-bs-*`, tanpa JavaScript tambahan.
-- Formulir konsultasi bersifat **simulasi**; data tidak dikirim ke server.
-- Berkas ini tidak memakai `!important` sama sekali. Warna dasar navbar dan warna latar
-  kartu/modal ditimpa lewat selector langsung (`.navbar`, `.card`), bukan lewat utilitas
-  Bootstrap yang bertanda `!important` bawaan, dan aturan `prefers-reduced-motion` menimpa
-  `:hover` yang sama persis sehingga menang lewat urutan cascade, bukan `!important`.
-- Selama proses refactoring, ditemukan satu bug dari efek samping override tema: Bootstrap
-  menghitung warna latar `.card` dan `.modal-content` dari `--bs-body-bg` secara internal,
-  sehingga saat warna latar halaman diubah, warna kartu ikut berubah dan nyaris menyatu
-  dengan latar. Diperbaiki dengan menyasar `.card`, `.modal-content`, dan `.dropdown-menu`
-  secara langsung.
+- Data pada `projects.json` dan `services.json` memuat beberapa angka (`metrics`, `priceLabel`)
+  yang bersifat **contoh/placeholder** dan sebaiknya disesuaikan dengan data sebenarnya
+  sebelum dikumpulkan.
+- Formulir tetap **simulasi** di sisi server (`submitServiceOrder()` mengembalikan respons
+  buatan setelah jeda 600ms), karena GitHub Pages tidak punya backend sungguhan. Yang nyata
+  adalah **pola pengirimannya**: asinkron, tanpa reload, dengan status tombol dan Toast.
+- Setiap data yang disuntikkan ke `innerHTML` (judul proyek, deskripsi, dsb.) melewati fungsi
+  `escapeHTML()` di `app.js`, sebagai pertahanan lapis pertama terhadap DOM-based XSS, sesuai
+  anjuran modul.
 
 ## Teknologi
 
-HTML5, Bootstrap 5.3.3 (CDN), Bootstrap Icons 1.11.3 (CDN), CSS3 kustom (Custom Properties,
-Flexbox, Grid), JavaScript minimal (delapan baris, validasi formulir resmi Bootstrap), Git,
-GitHub Pages.
+HTML5, Bootstrap 5.3.3 (CDN), Bootstrap Icons, CSS3 kustom, JavaScript ES6+ (`fetch`,
+`async/await`, modul IIFE), `localStorage`, Git, GitHub Pages.
