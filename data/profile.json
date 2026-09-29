@@ -1,0 +1,28 @@
+{
+  "name": "Silvia Eklesiana Sitorus",
+  "role": "UI/UX Designer & Front-End Developer",
+  "tagline": "Mahasiswa S1 Sistem Informasi Institut Teknologi Del. Saya merancang pengalaman digital lewat UI/UX dan pengembangan perangkat lunak.",
+  "photo": "../assets/profile.jpeg",
+  "email": "silviaeklesiana12@gmail.com",
+  "socials": {
+    "github": "https://github.com/SilviaSitorus12",
+    "linkedin": "https://www.linkedin.com/in/silvia-sitorus",
+    "instagram": "https://instagram.com/silvia_ekle12"
+  },
+  "education": {
+    "program": "S1 Sistem Informasi",
+    "campus": "Institut Teknologi Del",
+    "semester": 5
+  },
+  "skills": {
+    "Desain": ["Figma", "Wireframing & prototyping", "Heuristic evaluation"],
+    "Pemrograman": ["Python", "Java", "HTML & CSS", "JavaScript", "SQL"],
+    "Analisis sistem": ["BPMN", "ERD", "SRS", "DFD"],
+    "Alat kerja": ["Git & GitHub", "Canva", "Maze"]
+  },
+  "stats": {
+    "projectsCompleted": 5,
+    "yearsLearning": 2,
+    "certifications": 2
+  }
+}
