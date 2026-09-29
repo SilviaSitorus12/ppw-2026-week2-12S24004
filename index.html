@@ -2,6 +2,26 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <!--
+    Content Security Policy (CSP) — pertahanan lapis kedua terhadap XSS,
+    di atas escapeHTML() yang sudah dipakai di app.js.
+    Membatasi dari domain mana browser boleh memuat skrip, gaya, dan font.
+    Catatan jujur: 'unsafe-inline' pada script-src dan style-src masih
+    dipakai di sini, karena halaman ini memakai satu blok <script> inline
+    untuk validasi formulir dan beberapa atribut style="" inline. CSP yang
+    lebih ketat (tanpa unsafe-inline) memerlukan nonce atau memindahkan
+    semuanya ke berkas eksternal, yang belum dilakukan di versi ini.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';
+    style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com 'unsafe-inline';
+    font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'self';
+    base-uri 'self';
+    form-action 'self';
+  ">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portofolio Silvia Eklesiana Sitorus, mahasiswa S1 Sistem Informasi Institut Teknologi Del, UI/UX Designer dan Software Developer. Dibangun dengan Bootstrap 5.3.">
   <title>Portofolio Silvia Eklesiana Sitorus | PPW Del</title>
@@ -69,7 +89,6 @@
               <li class="list-inline-item badge rounded-pill badge-soft mb-2">Front-end</li>
               <li class="list-inline-item badge rounded-pill badge-soft mb-2">Analisis sistem</li>
             </ul>
-            <div id="heroStats" class="d-flex flex-wrap gap-4 mb-4" aria-live="polite"></div>
             <div class="d-flex flex-wrap gap-3">
               <a href="#portofolio" class="btn btn-brand btn-lg rounded-pill px-4">Lihat portofolio</a>
               <a href="#layanan" class="btn btn-outline-brand btn-lg rounded-pill px-4">Pesan konsultasi</a>
@@ -89,9 +108,9 @@
     </section>
 
     <!-- ===== SECTION: TENTANG SAYA ===== -->
-    <section id="tentang" class="py-5" aria-labelledby="judul-tentang">
+    <section id="tentang" class="py-5 section-divider" aria-labelledby="judul-tentang">
       <div class="container py-4">
-        <h2 id="judul-tentang" class="fw-bold mb-4">Tentang saya</h2>
+        <h2 id="judul-tentang" class="fw-bold mb-4 section-title-box">Tentang saya</h2>
 
         <div class="row gy-4">
           <article class="col-lg-8">
@@ -191,9 +210,9 @@
     </section>
 
     <!-- ===== SECTION: PORTOFOLIO (Grid 12-kolom + Modal) ===== -->
-    <section id="portofolio" class="py-5 bg-tint" aria-labelledby="judul-portofolio">
+    <section id="portofolio" class="py-5 bg-tint section-divider" aria-labelledby="judul-portofolio">
       <div class="container py-4">
-        <h2 id="judul-portofolio" class="fw-bold mb-2">Portofolio karya</h2>
+        <h2 id="judul-portofolio" class="fw-bold mb-2 section-title-box">Portofolio karya</h2>
         <p class="text-body-secondary mb-4">
           Data proyek di bawah ini dimuat secara dinamis dari <code>data/projects.json</code>.
           Klik <strong>Lihat detail</strong> untuk membuka ringkasan proyek di jendela modal.
@@ -288,10 +307,10 @@
     </section>
 
     <!-- ===== SECTION: FORMULIR LAYANAN (Bootstrap: floating labels, input group, validasi) ===== -->
-    <section id="layanan" class="py-5" aria-labelledby="judul-layanan">
+    <section id="layanan" class="py-5 section-divider" aria-labelledby="judul-layanan">
       <div class="container py-4">
         <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
-          <h2 id="judul-layanan" class="fw-bold mb-0">Formulir layanan konsultasi</h2>
+          <h2 id="judul-layanan" class="fw-bold mb-0 section-title-box">Formulir layanan konsultasi</h2>
           <span id="orderHistoryBadge" class="badge rounded-pill badge-soft d-none" title="Riwayat permintaan tersimpan di perangkat ini"></span>
         </div>
         <p class="text-body-secondary mb-4">Ceritakan kebutuhan desain atau website Anda. Kolom bertanda <span class="text-danger">*</span> wajib diisi.</p>

@@ -4,31 +4,46 @@
     "name": "Desain UI/UX (Figma)",
     "icon": "bi-palette",
     "summary": "Riset pengguna, wireframe, hingga prototipe interaktif siap uji.",
-    "features": ["Riset & wawancara pengguna", "Wireframe low-fidelity", "Prototipe interaktif di Figma", "Satu kali revisi besar"],
-    "priceLabel": "Mulai dari Rp750.000"
+    "features": [
+      "Riset & wawancara pengguna",
+      "Wireframe low-fidelity",
+      "Prototipe interaktif di Figma",
+      "Satu kali revisi besar"
+    ]
   },
   {
     "id": "web",
     "name": "Website atau Landing Page",
     "icon": "bi-window",
     "summary": "Halaman web responsif, dari struktur HTML sampai siap publikasi.",
-    "features": ["Desain responsif (mobile-first)", "Struktur HTML semantik", "Optimasi kecepatan dasar", "Panduan deploy ke hosting"],
-    "priceLabel": "Mulai dari Rp1.200.000"
+    "features": [
+      "Desain responsif (mobile-first)",
+      "Struktur HTML semantik",
+      "Optimasi kecepatan dasar",
+      "Panduan deploy ke hosting"
+    ]
   },
   {
     "id": "sistem",
     "name": "Analisis dan Perancangan Sistem",
     "icon": "bi-diagram-3",
     "summary": "Pemetaan proses bisnis dan struktur data untuk sistem informasi.",
-    "features": ["Diagram BPMN / DFD", "Perancangan ERD", "Dokumen SRS ringkas", "Sesi diskusi kebutuhan"],
-    "priceLabel": "Mulai dari Rp900.000"
+    "features": [
+      "Diagram BPMN / DFD",
+      "Perancangan ERD",
+      "Dokumen SRS ringkas",
+      "Sesi diskusi kebutuhan"
+    ]
   },
   {
     "id": "review",
     "name": "Review Usability dan Aksesibilitas",
     "icon": "bi-eye",
     "summary": "Audit singkat kemudahan pakai dan kepatuhan aksesibilitas dasar.",
-    "features": ["Evaluasi heuristik", "Cek kontras & navigasi keyboard", "Laporan temuan dan rekomendasi"],
-    "priceLabel": "Mulai dari Rp500.000"
+    "features": [
+      "Evaluasi heuristik",
+      "Cek kontras & navigasi keyboard",
+      "Laporan temuan dan rekomendasi"
+    ]
   }
 ]

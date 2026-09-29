@@ -5,11 +5,16 @@
     "role": "UI/UX Designer & Business Analyst",
     "category": "Platform pariwisata",
     "description": "Platform pariwisata terpadu yang mempromosikan wisata lokal dan memperkaya pengalaman perjalanan wisatawan. Peran saya mencakup riset pengguna, penyusunan wireframe, hingga prototipe interaktif di Figma, serta analisis kebutuhan bisnis platform.",
-    "tags": ["Figma", "Canva", "Riset Pengguna", "Wireframe", "Prototipe Interaktif"],
-    "thumbnail": "../assets/globora.png",
+    "tags": [
+      "Figma",
+      "Canva",
+      "Riset Pengguna",
+      "Wireframe",
+      "Prototipe Interaktif"
+    ],
+    "thumbnail": "assets/globora.png",
     "link": "https://www.figma.com/design/WTyEKYrKFgQfdNl4Haerdf/dianita-ginting21-s-team-library",
-    "linkLabel": "Lihat desain GLOBORA",
-    "metrics": { "durationWeeks": 6, "teamSize": 4, "role": "UI/UX & Business Analyst" }
+    "linkLabel": "Lihat desain GLOBORA"
   },
   {
     "id": "imuniku",
@@ -17,11 +22,16 @@
     "role": "UI/UX Designer",
     "category": "Aplikasi",
     "description": "Aplikasi pemantauan imunisasi anak yang membantu orang tua menjaga kesehatan anaknya. Saya merancang alur pengingat jadwal, kartu riwayat imunisasi, dan menguji kegunaannya lewat sesi pengujian pengguna memakai Maze.",
-    "tags": ["Figma", "Maze", "UI Kit", "Usability Testing", "Onboarding"],
-    "thumbnail": "../assets/imuniku.png",
+    "tags": [
+      "Figma",
+      "Maze",
+      "UI Kit",
+      "Usability Testing",
+      "Onboarding"
+    ],
+    "thumbnail": "assets/imuniku.png",
     "link": "https://www.figma.com/design/1krxirOo93xABqEIKacb66/ImuniKu_-UI-UX",
-    "linkLabel": "Lihat desain Imuniku",
-    "metrics": { "durationWeeks": 5, "teamSize": 3, "role": "UI/UX Designer" }
+    "linkLabel": "Lihat desain Imuniku"
   },
   {
     "id": "labersa",
@@ -29,11 +39,15 @@
     "role": "System Analyst & UI/UX Designer",
     "category": "Sistem informasi",
     "description": "Sistem informasi reservasi dan pengelolaan berbasis web untuk Labersa Sport Center, mencakup rancangan alur konfirmasi pembayaran dan jadwal lapangan secara real-time.",
-    "tags": ["Figma", "Analisis Sistem", "BPMN", "ERD"],
-    "thumbnail": "../assets/labersa.png",
+    "tags": [
+      "Figma",
+      "Analisis Sistem",
+      "BPMN",
+      "ERD"
+    ],
+    "thumbnail": "assets/labersa.png",
     "link": "https://www.figma.com/design/mq0gXGzPreqN0ibt8bnhre/Untitled",
-    "linkLabel": "Lihat desain Labersa",
-    "metrics": { "durationWeeks": 7, "teamSize": 4, "role": "System Analyst & UI/UX" }
+    "linkLabel": "Lihat desain Labersa"
   },
   {
     "id": "dummymine",
@@ -41,11 +55,14 @@
     "role": "Python Game Developer",
     "category": "Game",
     "description": "Game sandbox bergaya Minecraft yang dibangun dengan Python dan prinsip pemrograman berorientasi objek, mencakup sistem dunia berbasis blok dan interaksi karakter sederhana.",
-    "tags": ["Python", "OOP", "Game Development"],
-    "thumbnail": "../assets/dummymine.jpg",
+    "tags": [
+      "Python",
+      "OOP",
+      "Game Development"
+    ],
+    "thumbnail": "assets/dummymine.jpg",
     "link": "https://github.com/SilviaSitorus12/dummymine",
-    "linkLabel": "Lihat kode DummyMine",
-    "metrics": { "durationWeeks": 4, "teamSize": 1, "role": "Solo Developer" }
+    "linkLabel": "Lihat kode DummyMine"
   },
   {
     "id": "nextstep",
@@ -53,10 +70,13 @@
     "role": "Front-End Developer",
     "category": "Platform AI",
     "description": "Platform panduan karier berbasis AI yang membantu mahasiswa menjelajahi pilihan karier, dibangun dengan HTML, CSS, dan JavaScript murni.",
-    "tags": ["HTML", "CSS", "JavaScript"],
-    "thumbnail": "../assets/nextstep.png",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "thumbnail": "assets/nextstep.png",
     "link": "https://github.com/SilviaSitorus12/nextstep",
-    "linkLabel": "Lihat kode NextStep AI",
-    "metrics": { "durationWeeks": 3, "teamSize": 2, "role": "Front-End Developer" }
+    "linkLabel": "Lihat kode NextStep AI"
   }
 ]

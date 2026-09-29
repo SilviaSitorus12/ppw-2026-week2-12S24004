@@ -207,13 +207,7 @@
            class="img-fluid rounded-3 mb-3">
       <p><strong>Peran:</strong> ${escapeHTML(project.role)}</p>
       <p>${escapeHTML(project.description)}</p>
-      <div class="mb-2">${tagsHTML}</div>
-      ${
-        project.metrics
-          ? `<p class="small text-body-secondary mb-0">Durasi sekitar ${escapeHTML(project.metrics.durationWeeks)} minggu,
-             dikerjakan bersama ${escapeHTML(project.metrics.teamSize)} orang.</p>`
-          : ""
-      }`;
+      <div class="mb-2">${tagsHTML}</div>`;
 
     const linkEl = document.getElementById("projectModalLink");
     linkEl.href = project.link || "#";
@@ -263,24 +257,6 @@
       if (nameEl) nameEl.textContent = `${profile.name}.`;
       if (taglineEl) taglineEl.textContent = profile.tagline;
       if (photoEl && profile.photo) photoEl.src = profile.photo;
-
-      const statsWrap = document.getElementById("heroStats");
-      if (statsWrap && profile.stats) {
-        const entries = [
-          ["Proyek selesai", profile.stats.projectsCompleted],
-          ["Tahun belajar", profile.stats.yearsLearning],
-          ["Sertifikasi", profile.stats.certifications],
-        ];
-        statsWrap.innerHTML = entries
-          .map(
-            ([label, num]) => `
-          <div class="hero-stat">
-            <span class="num">${escapeHTML(num)}</span>
-            <span class="label">${escapeHTML(label)}</span>
-          </div>`
-          )
-          .join("");
-      }
     } catch (err) {
       // Fallback: biarkan teks statis bawaan HTML yang tampil. Ini contoh
       // penerapan progressive enhancement: halaman tetap bisa dibaca
