@@ -1,4 +1,195 @@
-## Profil Kinerja Jaringan (DevTools)
+# Portofolio Silvia Eklesiana Sitorus — Week 4: Arsitektur Decoupled & Dynamic CSR
+
+| Keterangan | Isi |
+|---|---|
+| Nama | Silvia Eklesiana Sitorus |
+| NIM | 12S24004 |
+| Program Studi | Sarjana Sistem Informasi — Institut Teknologi Del |
+| Mata Kuliah | Pemrograman dan Pengujian Web (12S3101) |
+| Branch | `week4-architecture` |
+| Live Demo | https://silviasitorus12.github.io/ppw-2026-week2-12S24004/ |
+
+Repositori ini merupakan kelanjutan tugas Minggu 3. Portofolio yang sebelumnya bersifat **monolitik statis** (seluruh kartu, modal, dan katalog layanan ditulis langsung di `index.html`) direfaktor menjadi aplikasi web berarsitektur **decoupled multi-tier** dengan **Dynamic Client-Side Rendering (CSR)**. Seluruh konten kini dimuat secara asinkron dari berkas JSON terpisah.
+
+---
+
+## 1. Diagram Arsitektur Sistem (C4 Container Model)
+
+```mermaid
+flowchart TB
+    user(["Pengunjung<br/>Recruiter / Calon Klien"])
+
+    subgraph client["Presentation Tier — Browser Pengguna"]
+        html["index.html<br/>HTML5 Shell + Bootstrap 5"]
+        app["app.js<br/>Presentation Layer:<br/>render DOM, UI States, Modal, Form"]
+        api["api-service.js<br/>Data Access Layer:<br/>fetch() + error handling"]
+        ls[("localStorage<br/>Riwayat pesanan layanan")]
+    end
+
+    subgraph hosting["Static Server + CDN — GitHub Pages (Fastly)"]
+        static["Aset Statis<br/>HTML, CSS, JS, gambar"]
+        json["JSON Data Providers<br/>profile.json · projects.json · services.json"]
+    end
+
+    subgraph external["Layanan Eksternal"]
+        rest["Mock REST API<br/>HTTP POST pesanan layanan"]
+        thirdcdn["CDN Pihak Ketiga<br/>Bootstrap 5 · Google Fonts"]
+    end
+
+    user -->|HTTPS| html
+    html -->|memuat| static
+    html -->|memuat CSS & font| thirdcdn
+    html --> app
+    app -->|memanggil| api
+    api -->|GET JSON asinkron| json
+    api -->|POST JSON DTO| rest
+    app -->|simpan & baca| ls
+```
+
+### Pemetaan Lapisan (Multi-Tier)
+
+| Tier | Komponen | Tanggung Jawab |
+|---|---|---|
+| **Presentation Tier** | `index.html`, `css/custom-style.css`, `js/app.js` | Menampilkan antarmuka, merakit DOM secara dinamis, mengelola UI States, modal, filter, dan interaksi formulir |
+| **Application / Service Logic Tier** | `js/api-service.js`, Mock REST API | Menjadi satu-satunya pintu akses data: memanggil HTTP `fetch()`, memeriksa status respons, dan melempar error secara defensif |
+| **Data Storage Tier** | `data/*.json`, `localStorage` | Menyimpan data profil, proyek, dan layanan sebagai *mock RESTful data layer*, serta riwayat pesanan di sisi klien |
+
+### Narasi Pemisahan Minat (Separation of Concerns)
+
+Arsitektur ini memisahkan tiga hal yang sebelumnya tercampur di satu berkas `index.html`: **data**, **logika akses data**, dan **tampilan**.
+
+1. **Data dipisahkan dari tampilan.** Isi portofolio kini berada di `data/*.json`. Menambah atau mengubah proyek cukup dengan mengedit JSON, tanpa menyentuh HTML. Struktur ini meniru kontrak REST API sungguhan, sehingga kelak berkas JSON dapat diganti dengan *endpoint* backend tanpa mengubah lapisan tampilan.
+2. **Akses data dipisahkan dari logika tampilan.** Seluruh pemanggilan `fetch()` terpusat di `api-service.js` (*Data Access Layer*). `app.js` tidak perlu tahu dari mana data berasal; ia hanya menerima data yang sudah siap dirender. Jika sumber data berubah, cukup satu berkas yang disesuaikan.
+3. **Tampilan dirakit di sisi klien.** Server (GitHub Pages) hanya mengirim *HTML shell* dan berkas statis, sedangkan DOM dirakit di browser. Beban komputasi server menjadi sangat rendah dan aset dapat disajikan cepat dari CDN.
+
+Pemisahan ini membuat kode lebih mudah dirawat, diuji per lapisan, dan dikembangkan ke arsitektur yang lebih besar.
+
+### Komparasi Paradigma Arsitektur
+
+| Parameter | Monolith SSR | CSR (proyek ini) | Jamstack |
+|---|---|---|---|
+| Perakitan DOM | Di server setiap request | Di browser via JavaScript | Saat *build* + data via API |
+| Beban server | Tinggi | Sangat rendah (hanya kirim berkas) | Minimal (CDN edge) |
+| TTFB | Menengah–lambat | Cepat (HTML shell kecil) | Sangat cepat |
+| Navigasi | *Full page reload* | Mulus tanpa reload | Mulus dan reaktif |
+| Hosting | Server aktif 24/7 | Static CDN (GitHub Pages) | Static CDN + serverless |
+
+Proyek ini menerapkan **CSR di atas hosting statis ber-CDN**, sehingga sudah memiliki karakteristik utama Jamstack: aset disajikan dari edge server CDN dan data dimuat melalui kontrak JSON.
+
+---
+
+## 2. Struktur Direktori
+
+```
+ppw-2026-week2-12S24004/
+├── index.html            # HTML shell bersih tanpa kartu hardcoded + 1 modal universal
+├── assets/               # Foto profil, gambar proyek, sertifikat
+├── css/
+│   └── custom-style.css  # Custom styles, theming & CSS variables
+├── data/
+│   ├── profile.json      # Biodata dan statistik
+│   ├── projects.json     # Koleksi proyek portofolio
+│   └── services.json     # Katalog paket layanan
+├── js/
+│   ├── api-service.js    # Data Access Layer: fetch & error handling
+│   └── app.js            # Presentation Layer: rendering, UI states, events
+├── screenshots/          # Bukti tampilan dan hasil profiling DevTools
+└── README.md
+```
+
+---
+
+## 3. Implementasi Fitur
+
+### 3.1 Dekomposisi Data Layer JSON
+
+| Berkas | Isi |
+|---|---|
+| `profile.json` | Data diri: nama, peran, deskripsi, keahlian, statistik |
+| `projects.json` | 4 proyek (GLOBORA, Imuniku, Labersa, NextStep) lengkap dengan kategori, deskripsi, peran, *tags*, gambar, dan tautan |
+| `services.json` | Paket layanan beserta fitur dan tarif |
+
+### 3.2 Dynamic CSR dan 4 UI States
+
+Data dimuat secara asinkron dengan `async/await` melalui `api-service.js`, lalu dirender oleh `app.js`. Empat status antarmuka ditangani secara visual:
+
+| UI State | Kapan Muncul | Tampilan |
+|---|---|---|
+| **Loading** | Saat data sedang diambil | Spinner / skeleton |
+| **Success** | Data berhasil dimuat | Kartu proyek dan layanan dirender |
+| **Empty** | Filter kategori tidak menemukan proyek | Pesan "belum ada proyek" |
+| **Error** | Request gagal atau respons bukan 2xx | Alert peringatan defensif |
+
+Filter kategori bekerja instan di sisi klien tanpa memuat ulang data dari server.
+
+### 3.3 Universal Dynamic Modal
+
+Hanya ada **satu** elemen modal di `index.html`. Tombol **Lihat detail** pada setiap kartu membawa `data-id`, lalu `app.js` mencari proyek yang sesuai dan menyuntikkan rinciannya ke modal melalui Bootstrap 5 Modal API (`bootstrap.Modal.getOrCreateInstance`). Tidak ada duplikasi elemen HTML untuk setiap proyek.
+
+### 3.4 Decoupled REST Form dan State Lokal
+
+- Formulir pemesanan layanan dikirim secara asinkron melalui `fetch()` dengan metode **HTTP POST** dan *payload* JSON, dengan `e.preventDefault()` sehingga tidak terjadi *full page reload*.
+- Tombol submit dinonaktifkan dan menampilkan spinner selama proses pengiriman.
+- Hasil pengiriman ditampilkan melalui **Bootstrap Toast**.
+- Data pesanan disimpan di **localStorage** dan jumlahnya ditampilkan pada badge di antarmuka.
+
+### 3.5 Keamanan Sisi Klien
+
+**Pencegahan DOM-based XSS.** Nilai dinamis dirender menggunakan `textContent` atau melalui fungsi `escapeHTML()` sebelum dimasukkan ke `innerHTML`, sehingga karakter seperti `<`, `>`, `"`, dan `'` tidak dieksekusi sebagai kode.
+
+**Rancangan Content Security Policy (CSP):**
+
+```
+default-src 'self';
+script-src 'self' https://cdn.jsdelivr.net;
+style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com;
+img-src 'self' data:;
+connect-src 'self';
+object-src 'none';
+base-uri 'self';
+```
+
+| Direktif | Tujuan |
+|---|---|
+| `default-src 'self'` | Secara bawaan hanya mengizinkan sumber dari domain sendiri |
+| `script-src` | Membatasi JavaScript hanya dari domain sendiri dan CDN Bootstrap |
+| `style-src` / `font-src` | Mengizinkan CSS dan font dari CDN Bootstrap dan Google Fonts |
+| `img-src 'self' data:` | Mengizinkan gambar lokal dan ikon SVG berbentuk `data:` dari Bootstrap |
+| `connect-src` | Membatasi tujuan `fetch()`; tambahkan domain Mock REST API yang dipakai |
+| `object-src 'none'` | Memblokir plugin seperti `<object>` dan `<embed>` |
+
+---
+
+## 4. Perbandingan Sebelum vs Sesudah Refactoring
+
+| Aspek | Sebelum (Week 3) | Sesudah (Week 4) |
+|---|---|---|
+| Arsitektur | Monolitik statis dalam satu `index.html` | Decoupled multi-tier (data, akses data, tampilan terpisah) |
+| Sumber data | Hardcoded di HTML | `data/profile.json`, `projects.json`, `services.json` |
+| Rendering | HTML statis dari server | Dynamic CSR dengan `fetch()` + `async/await` |
+| UI States | Tidak ada | Loading, Success, Empty, Error |
+| Modal proyek | Satu modal terpisah untuk setiap proyek | Satu Universal Dynamic Modal berbasis `data-id` |
+| Formulir layanan | Submit standar | Fetch POST asinkron + Toast, tanpa reload |
+| Penyimpanan pesanan | Tidak ada | `localStorage` + badge jumlah pesanan |
+| Keamanan | Belum ada penanganan khusus | Sanitasi XSS + rancangan CSP |
+| Menambah proyek baru | Menyalin blok HTML kartu dan modal | Cukup menambah satu objek di `projects.json` |
+
+**Tampilan Sebelum Refactoring**
+
+![Sebelum - Desktop](screenshots/sebelum-desktop.png)
+
+![Sebelum - Mobile](screenshots/sebelum-mobile.png)
+
+**Tampilan Sesudah Refactoring**
+
+![Sesudah - Desktop](screenshots/sesudah-desktop.png)
+
+![Sesudah - Mobile](screenshots/sesudah-mobile.png)
+
+---
+
+## 5. Profil Kinerja Jaringan (DevTools)
 
 ### Lingkungan Pengujian
 
@@ -66,16 +257,36 @@ Berkas `profile.json`, `projects.json`, dan `services.json` pada Warm Load diamb
 ### Screenshot Hasil Pengukuran
 
 **Cold Load – Waterfall**
-![Cold Load Waterfall](docs/screenshots/cold-load-waterfall.png)
+
+![Cold Load Waterfall](screenshots/cold-load-waterfall.png)
 
 **Cold Load – Timing (TTFB)**
-![Cold Load Timing](docs/screenshots/cold-load-timing.png)
+
+![Cold Load Timing](screenshots/cold-load-timing.png)
 
 **Warm Load – Waterfall**
-![Warm Load Waterfall](docs/screenshots/warm-load-waterfall.png)
+
+![Warm Load Waterfall](screenshots/warm-load-waterfall.png)
 
 **Warm Load – Timing (TTFB)**
-![Warm Load Timing](docs/screenshots/warm-load-timing.png)
+
+![Warm Load Timing](screenshots/warm-load-timing.png)
 
 **Warm Load – Response Headers (304, ETag, Cache-Control)**
-![Warm Load Headers](docs/screenshots/warm-load-headers.
+
+![Warm Load Headers](screenshots/warm-load-headers.png)
+
+---
+
+## 6. Git dan Deployment
+
+```bash
+git checkout -b week4-architecture
+git add .
+git commit -m "feat(week4): decouple architecture to json data providers and async CSR"
+git push -u origin week4-architecture
+```
+
+GitHub Pages diaktifkan melalui **Settings → Pages → Source: Branch `week4-architecture`**.
+
+**Live Demo:** https://silviasitorus12.github.io/ppw-2026-week2-12S24004/
